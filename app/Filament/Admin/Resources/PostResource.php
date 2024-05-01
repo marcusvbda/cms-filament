@@ -18,18 +18,13 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-cursor-arrow-rays';
 
-    protected static ?string $navigationLabel = 'Postagens';
+    // protected static ?string $navigationLabel = 'Posts';
 
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationBadgeColor(): ?string
-    {
-        return 'primary';
-    }
-
-    protected static ?string $navigationGroup = 'CMS';
+    // protected static ?string $navigationGroup = 'CMS';
 
     public static function form(Form $form): Form
     {
