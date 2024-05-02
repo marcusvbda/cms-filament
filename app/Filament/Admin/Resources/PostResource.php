@@ -21,9 +21,7 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cursor-arrow-rays';
 
-    // protected static ?string $navigationLabel = 'Posts';
-
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationGroup = 'Blog';
 
@@ -77,6 +75,7 @@ class PostResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('category_id')
+                    ->label('Category')
                     ->relationship('category', 'name')
                     ->searchable(),
             ])
@@ -89,13 +88,6 @@ class PostResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            // Category::class,
-        ];
     }
 
     public static function getPages(): array
