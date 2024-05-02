@@ -3,14 +3,15 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\PostResource\Pages;
+use App\Models\Category;
 use App\Models\Post;
-use Filament\Forms\Components\{Section, TextInput, Toggle, FileUpload, RichEditor};
+use Filament\Forms\Components\{Section, TextInput, Toggle, RichEditor, Select};
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Filters\Filter;
-use Filament\Tables\Columns\{IconColumn, TextColumn, ImageColumn};
+use Filament\Tables\Columns\{IconColumn, TextColumn};
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Str;
 
@@ -24,27 +25,41 @@ class PostResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    // protected static ?string $navigationGroup = 'CMS';
+    protected static ?string $navigationGroup = 'Blog';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Section::make([
+                    Toggle::make('is_published'),
                     TextInput::make('title')
-                        ->label('Title')
                         ->required()
-                        ->live()
-                        ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                        ->placeholder('Enter the title of the post'),
+                        ->maxLength(255)
+                        ->live(onBlur: true)
+                        ->afterStateUpdated(function (Set $set, $state, $context) {
+                            if ($context === 'edit') return;
+                            $slug = Str::slug($state);
+                            $count = Category::where('slug', $slug)->count();
+                            if ($count > 0) $slug .= "-$count";
+                            $set('slug', $slug);
+                        }),
                     TextInput::make('slug')
-                        ->label('Slug')
+                        ->unique(ignoreRecord: true)
+                        ->live(onBlur: true)
+                        ->afterStateUpdated(function (Set $set, $state) {
+                            $set('slug', preg_replace('/\s+/', '', $state));
+                        })
                         ->required()
-                        ->placeholder('Enter the slug of the post'),
-                    FileUpload::make('image')->image(),
+                        ->maxLength(255)
+                        ->columnSpan('full'),
+                    Select::make('category_id')
+                        ->label('Category')
+                        ->required()
+                        ->relationship('category', 'name')
+                        ->searchable(),
                     RichEditor::make('content')->required(),
-                    Toggle::make('is_published')
-                ]),
+                ])
             ]);
     }
 
@@ -55,14 +70,15 @@ class PostResource extends Resource
                 TextColumn::make('id')->sortable()->searchable(),
                 TextColumn::make('title')->limit(20)->sortable()->searchable(),
                 TextColumn::make('slug')->limit(50)->sortable()->searchable(),
-                // ImageColumn::make('image'),
+                TextColumn::make('category.name')->limit(50)->sortable()->searchable(),
                 IconColumn::make('is_published')->boolean()->searchable()
                     ->trueIcon('heroicon-o-check-badge')
                     ->falseIcon('heroicon-o-x-mark')
             ])
             ->filters([
-                Filter::make('is_published')
-                    ->query(fn ($query) => $query->where('is_published', true)),
+                SelectFilter::make('category_id')
+                    ->relationship('category', 'name')
+                    ->searchable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -78,7 +94,7 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // Category::class,
         ];
     }
 
