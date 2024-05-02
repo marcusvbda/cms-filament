@@ -1,0 +1,10 @@
+{
+    "category": "categoria",
+    "name": "nome",
+    "description": "descrição",
+    "published": "publicado",
+    "content": "conteúdo",
+    "total posts": "total de posts",
+    "published posts": "posts publicados",
+    "draft posts": "posts rascunho"
+}

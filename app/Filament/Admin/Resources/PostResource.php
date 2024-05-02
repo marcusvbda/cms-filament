@@ -35,10 +35,10 @@ class PostResource extends Resource
         return $form
             ->schema([
                 Section::make([
-                    Toggle::make('is_published'),
+                    Toggle::make('is_published')->label(ucfirst(__('published')))->default(false),
                     TextInput::make('title')
                         ->required()
-                        ->label('Título')
+                        ->translateLabel()
                         ->maxLength(255)
                         ->live(onBlur: true)
                         ->afterStateUpdated(function (Set $set, $state, $context) {
@@ -58,11 +58,11 @@ class PostResource extends Resource
                         ->maxLength(255)
                         ->columnSpan('full'),
                     Select::make('category_id')
-                        ->label('Categoria')
+                        ->label((ucfirst(__('category'))))
                         ->required()
                         ->relationship('category', 'name')
                         ->searchable(),
-                    RichEditor::make('content')->required()->label('Conteúdo')
+                    RichEditor::make('content')->required()->label((ucfirst(__('content'))))
                 ])
             ]);
     }
@@ -72,16 +72,16 @@ class PostResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable()->searchable(),
-                TextColumn::make('title')->limit(20)->sortable()->searchable()->label("Título"),
+                TextColumn::make('title')->limit(20)->sortable()->searchable()->translateLabel(),
                 TextColumn::make('slug')->limit(50)->sortable()->searchable(),
-                TextColumn::make('category.name')->limit(50)->sortable()->searchable()->label("Categoria"),
-                IconColumn::make('is_published')->boolean()->searchable()->label("Published")->label("Publicado")
+                TextColumn::make('category.name')->limit(50)->sortable()->searchable()->label(ucfirst(__('category'))),
+                IconColumn::make('is_published')->boolean()->searchable()->label(ucfirst(__('published')))
                     ->trueIcon('heroicon-o-check-badge')
                     ->falseIcon('heroicon-o-x-mark')
             ])
             ->filters([
                 SelectFilter::make('category_id')
-                    ->label('Categoria')
+                    ->label(ucfirst(__('category')))
                     ->relationship('category', 'name')
                     ->searchable(),
             ])

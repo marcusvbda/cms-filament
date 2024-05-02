@@ -13,9 +13,9 @@ class QtyPosts extends StatsOverviewWidget
     protected function getStats(): array
     {
         return [
-            Stat::make(__('Total'), Post::count()),
-            Stat::make(__('Posts publicados'), Post::where('is_published', true)->count()),
-            Stat::make(__('Posts não publicados'), Post::where('is_published', false)->count()),
+            Stat::make(ucfirst(__('total posts')), Post::count()),
+            Stat::make(ucfirst(__('published posts')), Post::where('is_published', true)->count()),
+            Stat::make(ucfirst(__('draft posts')), Post::where('is_published', false)->count()),
         ];
     }
 }
