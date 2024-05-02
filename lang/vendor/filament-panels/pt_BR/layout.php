@@ -6,8 +6,12 @@ return [
 
     'actions' => [
 
+        'billing' => [
+            'label' => 'Gerenciar assinatura',
+        ],
+
         'logout' => [
-            'label' => 'Sair',
+            'label' => 'Logout',
         ],
 
         'open_database_notifications' => [

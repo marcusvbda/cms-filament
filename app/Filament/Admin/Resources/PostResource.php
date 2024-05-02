@@ -38,6 +38,7 @@ class PostResource extends Resource
                     Toggle::make('is_published'),
                     TextInput::make('title')
                         ->required()
+                        ->label('Título')
                         ->maxLength(255)
                         ->live(onBlur: true)
                         ->afterStateUpdated(function (Set $set, $state, $context) {
@@ -57,11 +58,11 @@ class PostResource extends Resource
                         ->maxLength(255)
                         ->columnSpan('full'),
                     Select::make('category_id')
-                        ->label('Category')
+                        ->label('Categoria')
                         ->required()
                         ->relationship('category', 'name')
                         ->searchable(),
-                    RichEditor::make('content')->required(),
+                    RichEditor::make('content')->required()->label('Conteúdo')
                 ])
             ]);
     }
@@ -71,16 +72,16 @@ class PostResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable()->searchable(),
-                TextColumn::make('title')->limit(20)->sortable()->searchable()->translateLabel(),
+                TextColumn::make('title')->limit(20)->sortable()->searchable()->label("Título"),
                 TextColumn::make('slug')->limit(50)->sortable()->searchable(),
-                TextColumn::make('category.name')->limit(50)->sortable()->searchable()->translateLabel(),
-                IconColumn::make('is_published')->boolean()->searchable()->label("Published")->translateLabel()
+                TextColumn::make('category.name')->limit(50)->sortable()->searchable()->label("Categoria"),
+                IconColumn::make('is_published')->boolean()->searchable()->label("Published")->label("Publicado")
                     ->trueIcon('heroicon-o-check-badge')
                     ->falseIcon('heroicon-o-x-mark')
             ])
             ->filters([
                 SelectFilter::make('category_id')
-                    ->label('Category')
+                    ->label('Categoria')
                     ->relationship('category', 'name')
                     ->searchable(),
             ])

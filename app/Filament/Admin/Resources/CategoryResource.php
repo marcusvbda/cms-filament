@@ -24,20 +24,20 @@ class CategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    // public static function getLabel(): ?string
-    // {
-    //     return __('category');
-    // }
+    public static function getLabel(): ?string
+    {
+        return "categoria";
+    }
 
-    // public static function getPluralLabel(): ?string
-    // {
-    //     return __('categories');
-    // }
+    public static function getPluralLabel(): ?string
+    {
+        return "Categorias";
+    }
 
-    // public static function getNavigationLabel(): string
-    // {
-    //     return self::getPluralLabel();
-    // }
+    public static function getNavigationLabel(): string
+    {
+        return self::getPluralLabel();
+    }
 
     public static function getGloballySearchableAttributes(): array
     {
@@ -49,6 +49,7 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label('Nome')
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
@@ -70,6 +71,7 @@ class CategoryResource extends Resource
                     ->maxLength(255)
                     ->columnSpan('full'),
                 RichEditor::make('description')
+                    ->label('Descrição')
                     ->columnSpan('full')
                     ->nullable()
                     ->toolbarButtons([
@@ -102,6 +104,7 @@ class CategoryResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('name')
+                    ->label("Nome")
                     ->searchable()
                     ->sortable(),
             ])
