@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Admin\Resources\PostsResource\Widgets\QtyPosts;
+use App\Filament\Admin\Resources\SettingsResource;
+use App\Http\Middleware\AddFilamentMenuItemsAdmin;
 use App\Models\Setting;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -43,9 +45,6 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::hex(Setting::find('primary_color')->value ?? "#EA580C"),
             ])
             ->login()
-            ->userMenuItems([
-                MenuItem::make()->label(ucfirst(__('settings')))->icon('feathericon-settings')->url('/admin/settings'),
-            ])
             // ->registration()
             // ->emailVerification()
             ->passwordReset()
@@ -71,6 +70,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                AddFilamentMenuItemsAdmin::class
             ])
             ->authMiddleware([
                 Authenticate::class,

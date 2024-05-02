@@ -75,9 +75,14 @@ class PostResource extends Resource
                 TextColumn::make('title')->limit(20)->sortable()->searchable()->translateLabel(),
                 TextColumn::make('slug')->limit(50)->sortable()->searchable(),
                 TextColumn::make('category.name')->limit(50)->sortable()->searchable()->label(ucfirst(__('category'))),
-                IconColumn::make('is_published')->boolean()->searchable()->label(ucfirst(__('published')))
-                    ->trueIcon('heroicon-o-check-badge')
-                    ->falseIcon('heroicon-o-x-mark')
+                TextColumn::make('is_published')->searchable()->label(ucfirst(__('published')))
+                    ->badge()
+                    ->getStateUsing(function ($record) {
+                        return ucfirst(__($record->is_published ? 'published' : 'draft'));
+                    })
+                    ->color(function ($record) {
+                        return $record->is_published ? 'success' : 'danger';
+                    })
             ])
             ->filters([
                 SelectFilter::make('category_id')

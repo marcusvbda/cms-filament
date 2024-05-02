@@ -11,6 +11,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Actions\EditAction;
+use Auth;
 
 class SettingsResource extends Resource
 {
@@ -50,9 +51,23 @@ class SettingsResource extends Resource
             ->columns([
                 TextColumn::make('label')
                     ->label(ucfirst(__("setting")))
-                    ->formatStateUsing(fn (string $state): string => ucfirst(__($state))),
+                    ->getStateUsing(fn ($record) => ucfirst(__($record->label))),
                 TextColumn::make('value')
                     ->label(ucfirst(__("value")))
+                    ->html()
+                    ->getStateUsing(function ($record) {
+                        if ($record->type === 'color') {
+                            $color = $record->value;
+                            return <<<BLADE
+                                <div style='display: flex;align-items: center;gap: 5px;'> 
+                                    <span style='height: 20px;width: 20px;border-radius: 100%;background-color:$color'></span>
+                                    $color
+                                </div>
+                            BLADE;
+                        } else {
+                            return ucfirst(__($record->label));
+                        }
+                    }),
             ])
             ->actions([
                 EditAction::make()
@@ -73,6 +88,11 @@ class SettingsResource extends Resource
                         };
                     }),
             ]);
+    }
+
+    public static function canAccess(): bool
+    {
+        return Auth::user()->isAdmin();
     }
 
     public static function canCreate(): bool
