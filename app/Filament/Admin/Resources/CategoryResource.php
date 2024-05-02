@@ -20,9 +20,29 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 1;
-
     protected static ?string $navigationGroup = 'Blog';
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    // public static function getLabel(): ?string
+    // {
+    //     return __('category');
+    // }
+
+    // public static function getPluralLabel(): ?string
+    // {
+    //     return __('categories');
+    // }
+
+    // public static function getNavigationLabel(): string
+    // {
+    //     return self::getPluralLabel();
+    // }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'slug'];
+    }
 
     public static function form(Form $form): Form
     {

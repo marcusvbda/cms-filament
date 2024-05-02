@@ -28,8 +28,15 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->default()
             ->path('admin')
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+            // ->topNavigation()
+            ->brandName("ORANGE")
+            // ->brandLogo(asset('img/logo.png'))
+            ->sidebarFullyCollapsibleOnDesktop()
+            ->spa()
+            ->databaseTransactions()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Orange,
             ])
             ->login()
             // ->registration()

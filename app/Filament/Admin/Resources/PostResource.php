@@ -21,9 +21,14 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cursor-arrow-rays';
 
-    protected static ?int $navigationSort = 2;
-
     protected static ?string $navigationGroup = 'Blog';
+
+    protected static ?string $recordTitleAttribute = 'title';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['title', 'slug'];
+    }
 
     public static function form(Form $form): Form
     {
@@ -66,10 +71,10 @@ class PostResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable()->searchable(),
-                TextColumn::make('title')->limit(20)->sortable()->searchable(),
+                TextColumn::make('title')->limit(20)->sortable()->searchable()->translateLabel(),
                 TextColumn::make('slug')->limit(50)->sortable()->searchable(),
-                TextColumn::make('category.name')->limit(50)->sortable()->searchable(),
-                IconColumn::make('is_published')->boolean()->searchable()
+                TextColumn::make('category.name')->limit(50)->sortable()->searchable()->translateLabel(),
+                IconColumn::make('is_published')->boolean()->searchable()->label("Published")->translateLabel()
                     ->trueIcon('heroicon-o-check-badge')
                     ->falseIcon('heroicon-o-x-mark')
             ])
