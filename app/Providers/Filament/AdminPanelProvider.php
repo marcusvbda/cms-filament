@@ -3,9 +3,11 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Admin\Resources\PostsResource\Widgets\QtyPosts;
+use App\Models\Setting;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -24,21 +26,26 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        $menuType = Setting::find('menu_type')?->value ?? "topbar";
+
         return $panel
             ->id('admin')
             ->default()
             ->path('admin')
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
-            // ->topNavigation()
-            ->brandName("ORANGE")
+            ->topNavigation($menuType === "topbar")
+            ->brandName(Setting::find('app_name')->value ?? "Filament")
             // ->brandLogo(asset('img/logo.png'))
-            ->sidebarFullyCollapsibleOnDesktop()
+            ->sidebarFullyCollapsibleOnDesktop($menuType === "sidebar")
             ->spa()
             ->databaseTransactions()
             ->colors([
-                'primary' => Color::Orange,
+                'primary' => Color::hex(Setting::find('primary_color')->value ?? "#EA580C"),
             ])
             ->login()
+            ->userMenuItems([
+                MenuItem::make()->label(ucfirst(__('settings')))->icon('feathericon-settings')->url('/admin/settings'),
+            ])
             // ->registration()
             // ->emailVerification()
             ->passwordReset()
