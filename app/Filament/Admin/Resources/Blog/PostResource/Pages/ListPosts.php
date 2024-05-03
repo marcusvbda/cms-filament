@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Filament\Admin\Resources\PostResource\Pages;
+namespace App\Filament\Admin\Resources\Blog\PostResource\Pages;
 
-use App\Filament\Admin\Resources\PostResource;
-use App\Filament\Admin\Resources\PostsResource\Widgets\QtyPosts;
-// use App\Filament\Admin\Widgets\StatsOverview;
+use App\Filament\Admin\Resources\Blog\PostResource;
+use App\Filament\Admin\Resources\Blog\PostsResource\Widgets\QtyPosts;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

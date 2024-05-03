@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\PostsResource\Widgets;
+namespace App\Filament\Admin\Resources\Blog\PostsResource\Widgets;
 
 use App\Models\Post;
 use Filament\Widgets\StatsOverviewWidget;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Admin\Resources\Blog;
 
-use App\Filament\Admin\Resources\CategoryResource\Pages;
+use App\Filament\Admin\Resources\Blog\CategoryResource\Pages;
 use App\Models\Category;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;

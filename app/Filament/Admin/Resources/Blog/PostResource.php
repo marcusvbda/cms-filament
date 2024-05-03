@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Admin\Resources\Blog;
 
-use App\Filament\Admin\Resources\PostResource\Pages;
+use App\Filament\Admin\Resources\Blog\PostResource\Pages;
 use App\Models\Category;
 use App\Models\Post;
 use Filament\Forms\Components\{Section, TextInput, Toggle, RichEditor, Select};
@@ -10,7 +10,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\{IconColumn, TextColumn};
+use Filament\Tables\Columns\{TextColumn};
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Str;

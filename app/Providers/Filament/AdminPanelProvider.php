@@ -2,8 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Admin\Resources\PostsResource\Widgets\QtyPosts;
-use App\Filament\Admin\Resources\SettingsResource;
+use App\Filament\Admin\Resources\Blog\PostsResource\Widgets\QtyPosts;
 use App\Http\Middleware\AddFilamentMenuItemsAdmin;
 use App\Models\Setting;
 use Filament\Http\Middleware\Authenticate;

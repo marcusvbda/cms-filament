@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Admin\Resources\Access;
 
-use App\Filament\Admin\Resources\UserResource\Pages;
+use App\Filament\Admin\Resources\Access\UserResource\Pages;
 use App\Models\User;
-use Filament\Forms;
+// use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Admin\Resources\Settings;
 
-use App\Filament\Admin\Resources\SettingsResource\Pages;
+use App\Filament\Admin\Resources\Settings\SettingsResource\Pages;
 use App\Models\Setting;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;

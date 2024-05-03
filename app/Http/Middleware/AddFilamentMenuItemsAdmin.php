@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Filament\Admin\Resources\SettingsResource;
+use App\Filament\Admin\Resources\Settings\SettingsResource;
 use Closure;
 use Filament\Navigation\MenuItem;
 use Illuminate\Http\Request;
