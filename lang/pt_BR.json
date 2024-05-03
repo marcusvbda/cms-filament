@@ -17,5 +17,6 @@
     "access": "acesso",
     "user": "usuário",
     "password": "senha",
-    "password_confirmation": "confirmação de senha"
+    "password_confirmation": "confirmação de senha",
+    "page": "página"
 }
