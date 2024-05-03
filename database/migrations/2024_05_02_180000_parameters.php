@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('parameters', function (Blueprint $table) {
             $table->string('key')->primary();
             $table->string('label');
             $table->text('value')->nullable();
@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->timestamps();
         });
+        (new SettingsSeeder())->run();
     }
 
     /**
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('parameters');
     }
 };

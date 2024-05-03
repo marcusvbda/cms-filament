@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Filament\Admin\Resources\Settings\SettingsResource;
+use App\Filament\Admin\Resources\Settings\ParametersResource;
 use Closure;
 use Filament\Navigation\MenuItem;
 use Illuminate\Http\Request;
@@ -17,9 +17,9 @@ class AddFilamentMenuItemsAdmin
             return $next($request);
         }
 
-        if (SettingsResource::canAccess()) {
+        if (ParametersResource::canAccess()) {
             filament()->getCurrentPanel()->userMenuItems([
-                MenuItem::make()->label(ucfirst(__('settings')))->icon('feathericon-settings')->url('/admin/settings')
+                MenuItem::make()->label(ucfirst(__('parameters')))->icon('feathericon-settings')->url('/admin/settings/parameters')
             ]);
         }
 

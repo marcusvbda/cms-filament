@@ -2,8 +2,8 @@
 
 namespace App\Filament\Admin\Resources\Settings;
 
-use App\Filament\Admin\Resources\Settings\SettingsResource\Pages;
-use App\Models\Setting;
+use App\Filament\Admin\Resources\Settings\ParametersResource\Pages;
+use App\Models\Parameter;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -13,21 +13,21 @@ use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Actions\EditAction;
 use Auth;
 
-class SettingsResource extends Resource
+class ParametersResource extends Resource
 {
-    protected static ?string $model = Setting::class;
+    protected static ?string $model = Parameter::class;
 
     protected static ?string $navigationIcon = 'feathericon-settings';
     protected static bool $shouldRegisterNavigation = false;
 
     public static function getLabel(): ?string
     {
-        return __('setting');
+        return __('parameters');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return __('settings');
+        return __('parameters');
     }
 
     // public static function getNavigationBadge(): ?string
@@ -108,7 +108,7 @@ class SettingsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageSettings::route('/'),
+            'index' => Pages\ManageParameters::route('/'),
         ];
     }
 }

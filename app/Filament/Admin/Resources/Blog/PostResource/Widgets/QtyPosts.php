@@ -8,8 +8,6 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class QtyPosts extends StatsOverviewWidget
 {
-    protected static ?int $sort = -4;
-
     protected function getStats(): array
     {
         return [

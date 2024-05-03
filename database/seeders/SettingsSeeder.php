@@ -2,23 +2,23 @@
 
 namespace Database\Seeders;
 
-use App\Models\Setting;
+use App\Models\Parameter;
 use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder
 {
     public function run(): void
     {
-        Setting::truncate();
+        Parameter::truncate();
 
-        Setting::create([
+        Parameter::create([
             'key' => 'app_name',
             'label' => 'application name',
             'value' => 'ORANGE',
             'type' => 'text',
         ]);
 
-        Setting::create([
+        Parameter::create([
             'key' => 'menu_type',
             'label' => 'menu type',
             'value' => 'sidebar',
@@ -31,7 +31,7 @@ class SettingsSeeder extends Seeder
             ],
         ]);
 
-        Setting::create([
+        Parameter::create([
             'key' => 'primary_color',
             'label' => 'primary color',
             'value' => '#EA580C',

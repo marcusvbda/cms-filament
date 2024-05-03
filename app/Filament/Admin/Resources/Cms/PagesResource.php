@@ -13,6 +13,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 class PagesResource extends Resource
 {
@@ -29,11 +31,39 @@ class PagesResource extends Resource
         return __('page');
     }
 
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['title', 'slug'];
+    }
+
+    public static function scanDirForBladeFiles()
+    {
+        $bladeFiles = [];
+        $viewsPath = resource_path('views');
+
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($viewsPath, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
+
+        foreach ($iterator as $file) {
+            if ($file->isFile() && $file->getExtension() === 'php') {
+                $relativePath = str_replace([$viewsPath, '.blade.php'], '', $file->getRealPath());
+                $bladeName = str_replace(DIRECTORY_SEPARATOR, '.', $relativePath);
+                $bladeFiles[] = basename($bladeName);
+            }
+        }
+
+        $bladeFiles = array_map(function ($name) {
+            return ltrim($name, '.');
+        }, $bladeFiles);
+
+        return $bladeFiles;
+    }
+
     public static function form(Form $form): Form
     {
-        $bladeFiles = array_map(function ($file) {
-            return str_replace('.blade.php', '', $file);
-        }, array_diff(scandir(resource_path('views')), ['..', '.']));
+        $bladeFiles = self::scanDirForBladeFiles();
         $bladeFiles = array_combine($bladeFiles, $bladeFiles);
 
         return $form
@@ -77,11 +107,13 @@ class PagesResource extends Resource
                     }),
                 TextColumn::make('url')
                     ->getStateUsing(function ($record) {
-                        $url = $record->slug === "index" ? "/" : "/" . $record->slug;
+                        $slug = str_replace(".", "/", $record->slug);
+                        $url = $record->slug === "index" ? "/" : "/" . $slug;
                         return $url;
                     })
                     ->url(function ($record) {
-                        $url = $record->slug === "index" ? "/" : "/" . $record->slug;
+                        $slug = str_replace(".", "/", $record->slug);
+                        $url = $record->slug === "index" ? "/" : "/" . $slug;
                         return $url;
                     }, true)
             ])
@@ -90,6 +122,7 @@ class PagesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{slug?}', [PagesController::class, 'show'])->name('pages.show');
+Route::get('/{slug}', [PagesController::class, 'show'])->where('slug', '.*');

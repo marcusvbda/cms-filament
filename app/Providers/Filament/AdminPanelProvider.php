@@ -3,12 +3,12 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Admin\Resources\Blog\PostsResource\Widgets\QtyPosts;
+use App\Filament\Admin\Resources\Cms\PagesResource\Widgets\QtyPages;
 use App\Http\Middleware\AddFilamentMenuItemsAdmin;
-use App\Models\Setting;
+use App\Models\Parameter;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        $menuType = Setting::find('menu_type')?->value ?? "topbar";
+        $menuType = Parameter::find('menu_type')?->value ?? "topbar";
 
         return $panel
             ->id('admin')
@@ -35,13 +35,13 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->topNavigation($menuType === "topbar")
-            ->brandName(Setting::find('app_name')->value ?? "Filament")
+            ->brandName(Parameter::find('app_name')->value ?? "Filament")
             // ->brandLogo(asset('img/logo.png'))
             ->sidebarFullyCollapsibleOnDesktop($menuType === "sidebar")
-            ->spa()
+            // ->spa()
             ->databaseTransactions()
             ->colors([
-                'primary' => Color::hex(Setting::find('primary_color')->value ?? "#EA580C"),
+                'primary' => Color::hex(Parameter::find('primary_color')->value ?? "#EA580C"),
             ])
             ->login()
             // ->registration()
@@ -55,6 +55,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
+                QtyPages::make(),
                 QtyPosts::make(),
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
