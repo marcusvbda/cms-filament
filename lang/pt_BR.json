@@ -13,5 +13,9 @@
     "application name": "nome da aplicação",
     "menu type": "tipo de menu",
     "primary color": "cor primária",
-    "draft": "rascunho"
+    "draft": "rascunho",
+    "access": "acesso",
+    "user": "usuário",
+    "password": "senha",
+    "password_confirmation": "confirmação de senha"
 }
