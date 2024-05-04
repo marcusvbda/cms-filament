@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Parameter;
 use Illuminate\Database\Seeder;
 
-class SettingsSeeder extends Seeder
+class ParametersSeeder extends Seeder
 {
     public function run(): void
     {

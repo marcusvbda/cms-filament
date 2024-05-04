@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources\Cms;
 
 use App\Filament\Admin\Resources\Cms\PagesResource\Pages;
 use App\Models\Page;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -74,10 +75,20 @@ class PagesResource extends Resource
                         ->required()
                         ->translateLabel()
                         ->maxLength(255),
-                    Select::make('slug')
+                    Select::make('blade')
                         ->unique(ignoreRecord: true)
                         ->required()
                         ->options($bladeFiles),
+                ]),
+                Section::make([
+                    Repeater::make('attrs')
+                        ->label(ucfirst(__('attributes')))
+                        ->schema([
+                            TextInput::make('key')->required()->distinct(),
+                            TextInput::make('type')->required(),
+                            TextInput::make('value')->required()->columnSpanFull(),
+                        ])
+                        ->columns(2)
                 ]),
             ]);
     }
@@ -134,7 +145,7 @@ class PagesResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // 
         ];
     }
 

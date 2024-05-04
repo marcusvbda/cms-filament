@@ -21,5 +21,6 @@
     "user": "usuário",
     "password": "senha",
     "password_confirmation": "confirmação de senha",
-    "page": "página"
+    "page": "página",
+    "attributes": "atributos"
 }

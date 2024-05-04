@@ -21,13 +21,16 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        $menuType = Parameter::find('menu_type')?->value ?? "topbar";
+        $tableParamsExists = DB::select("SELECT * FROM information_schema.tables WHERE table_name = 'parameters'");
+
+        $menuType = $tableParamsExists ? @Parameter::find('menu_type')?->value : "topbar";
 
         return $panel
             ->id('admin')
@@ -35,13 +38,13 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->topNavigation($menuType === "topbar")
-            ->brandName(Parameter::find('app_name')->value ?? "Filament")
+            ->brandName($tableParamsExists ?  (Parameter::find('app_name')->value ?? "Filament") : "Filament")
             // ->brandLogo(asset('img/logo.png'))
             ->sidebarFullyCollapsibleOnDesktop($menuType === "sidebar")
             // ->spa()
             ->databaseTransactions()
             ->colors([
-                'primary' => Color::hex(Parameter::find('primary_color')->value ?? "#EA580C"),
+                'primary' => Color::hex($tableParamsExists ? (Parameter::find('primary_color')->value ?? "#EA580C") : "#EA580C"),
             ])
             ->login()
             // ->registration()

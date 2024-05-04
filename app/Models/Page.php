@@ -11,7 +11,22 @@ class Page extends Model
 
     protected $fillable = [
         'title',
-        'slug',
-        'is_published'
+        'blade',
+        'is_published',
+        'meta',
+        'attrs',
     ];
+
+    protected $casts = [
+        'attrs' => 'array',
+    ];
+
+    public function attributeValue($key)
+    {
+        $attrs = $this->attrs ?? [];
+        $result = array_filter($attrs, function ($attr) use ($key) {
+            return $attr['key'] === $key;
+        });
+        return data_get(array_values($result), '0.value');
+    }
 }
