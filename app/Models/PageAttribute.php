@@ -15,11 +15,14 @@ class PageAttribute extends Model
         'fileValue',
         'imageValue',
         'type',
-        'booleanValue'
+        'booleanValue',
+        'repeaterValue',
+        'repeaterType'
     ];
 
     public $casts = [
-        'bolValue' => 'boolean'
+        'bolValue' => 'boolean',
+        'repeaterValue' => 'array'
     ];
 
     public function page()

@@ -28,5 +28,6 @@
     "text": "texto",
     "boolean": "booleano",
     "file": "arquivo",
-    "image": "imagem"
+    "image": "imagem",
+    "repeater": "repetidor"
 }

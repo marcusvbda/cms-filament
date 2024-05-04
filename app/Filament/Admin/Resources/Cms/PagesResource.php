@@ -85,6 +85,7 @@ class PagesResource extends Resource
                 ]),
                 Section::make([
                     Repeater::make('pageAttributes')
+                        ->reorderable(false)
                         ->label(ucfirst(__('attributes')))
                         ->relationship()
                         ->schema([
@@ -98,6 +99,7 @@ class PagesResource extends Resource
                                     'file' => ucfirst(__('file')),
                                     'image' => ucfirst(__('image')),
                                     'editor' => ucfirst(__('editor')),
+                                    'repeater' => ucfirst(__('repeater')),
                                 ])->default('text')->live(),
                             Toggle::make('booleanValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
                                 ->visible(fn ($get) => $get('type') === 'boolean'),
@@ -109,7 +111,30 @@ class PagesResource extends Resource
                                 ->visible(fn ($get) => $get('type') === 'image')->downloadable()->imageEditor(),
                             RichEditor::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
                                 ->visible(fn ($get) => $get('type') === 'editor'),
-
+                            Select::make('repeaterType')->required()->label(ucfirst(__('type')))
+                                ->columnSpanFull()
+                                ->options([
+                                    'text' => ucfirst(__('text')),
+                                    'image' => ucfirst(__('image')),
+                                ])->default('text')->live()
+                                ->visible(fn ($get) => $get('type') === 'repeater'),
+                            Repeater::make('repeaterValue')
+                                ->reorderable(false)
+                                ->label(ucfirst(__('items')))
+                                ->schema([
+                                    TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))->distinct()
+                                ])
+                                ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'text'))
+                                ->columnSpanFull(),
+                            Repeater::make('repeaterValue')
+                                ->reorderable(false)
+                                ->label(ucfirst(__('items')))
+                                ->schema([
+                                    FileUpload::make('imageValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                                        ->downloadable()->imageEditor(),
+                                ])
+                                ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'image'))
+                                ->columnSpanFull()
                         ])
                         ->columns(2)
                 ]),
