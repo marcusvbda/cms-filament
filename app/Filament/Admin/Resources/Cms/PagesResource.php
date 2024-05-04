@@ -4,7 +4,9 @@ namespace App\Filament\Admin\Resources\Cms;
 
 use App\Filament\Admin\Resources\Cms\PagesResource\Pages;
 use App\Models\Page;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -16,6 +18,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Str;
 
 class PagesResource extends Resource
 {
@@ -81,12 +84,32 @@ class PagesResource extends Resource
                         ->options($bladeFiles),
                 ]),
                 Section::make([
-                    Repeater::make('attrs')
+                    Repeater::make('pageAttributes')
                         ->label(ucfirst(__('attributes')))
+                        ->relationship()
                         ->schema([
-                            TextInput::make('key')->required()->distinct(),
-                            TextInput::make('type')->required(),
-                            TextInput::make('value')->required()->columnSpanFull(),
+                            TextInput::make('key')->required()->distinct()->label(ucfirst(__('key')))
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(fn ($set, $state) => $set('key', Str::slug($state, '_'))),
+                            Select::make('type')->required()->label(ucfirst(__('type')))
+                                ->options([
+                                    'text' => ucfirst(__('text')),
+                                    'boolean' => ucfirst(__('boolean')),
+                                    'file' => ucfirst(__('file')),
+                                    'image' => ucfirst(__('image')),
+                                    'editor' => ucfirst(__('editor')),
+                                ])->default('text')->live(),
+                            Toggle::make('booleanValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                                ->visible(fn ($get) => $get('type') === 'boolean'),
+                            TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                                ->visible(fn ($get) => $get('type') === 'text'),
+                            FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                                ->visible(fn ($get) => $get('type') === 'file')->downloadable(),
+                            FileUpload::make('imageValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                                ->visible(fn ($get) => $get('type') === 'image')->downloadable()->imageEditor(),
+                            RichEditor::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                                ->visible(fn ($get) => $get('type') === 'editor'),
+
                         ])
                         ->columns(2)
                 ]),

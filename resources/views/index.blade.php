@@ -1,5 +1,5 @@
 <h1>Página - {{ $page->title }}</h1>
 
-{{-- @php
-    dd($page->attributeValue('TESTE'));
-@endphp --}}
+<img src="{{ $attributes->teste_image }}" />
+
+{!! $attributes->teste_editor !!}

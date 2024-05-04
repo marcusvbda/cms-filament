@@ -14,19 +14,11 @@ class Page extends Model
         'blade',
         'is_published',
         'meta',
-        'attrs',
+        'attrs'
     ];
 
-    protected $casts = [
-        'attrs' => 'array',
-    ];
-
-    public function attributeValue($key)
+    public function pageAttributes()
     {
-        $attrs = $this->attrs ?? [];
-        $result = array_filter($attrs, function ($attr) use ($key) {
-            return $attr['key'] === $key;
-        });
-        return data_get(array_values($result), '0.value');
+        return $this->hasMany(PageAttribute::class);
     }
 }

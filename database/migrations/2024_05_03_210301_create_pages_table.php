@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('blade')->unique();
             $table->boolean('is_published')->default(false);
-            $table->jsonb('attrs')->nullable();
             $table->timestamps();
         });
     }

@@ -22,5 +22,11 @@
     "password": "senha",
     "password_confirmation": "confirmação de senha",
     "page": "página",
-    "attributes": "atributos"
+    "attributes": "atributos",
+    "key": "chave",
+    "type": "tipo",
+    "text": "texto",
+    "boolean": "booleano",
+    "file": "arquivo",
+    "image": "imagem"
 }
