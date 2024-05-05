@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('fileValue')->nullable();
             $table->longText('imageValue')->nullable();
             $table->boolean('booleanValue')->nullable();
+            $table->text('metaValue')->nullable();
             $table->text('repeaterType')->nullable();
             $table->jsonb('repeaterValue')->nullable();
             $table->timestamps();

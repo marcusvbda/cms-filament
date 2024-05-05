@@ -20,29 +20,38 @@ class Page extends Model
 
     public function getProcessedAttributes()
     {
-        return  (object)collect($this->pageAttributes->map(function ($row) {
+        return collect($this->pageAttributes)->map(function ($row) {
             $type = match ($row->type) {
-                'text' => 'text',
-                'editor' => 'text',
+                'text', 'editor' => 'text',
                 default => $row->type,
             };
+
             $index = $type . "Value";
             $value = $row->{$index};
+
             if (in_array($type, ['file', 'image'])) {
-                $value = Storage::url($value);
+                $value = (object) [
+                    'url' => Storage::url($value),
+                    'meta' => $row->metaValue,
+                ];
             }
 
-            if (in_array($type, ['repeater'])) {
-                $value = collect($row->repeaterValue)->pluck($row->repeaterType . "Value")->toArray();
-                if (in_array($row->repeaterType, ['file', 'image'])) {
-                    $value = collect($value)->map(function ($item) {
-                        return Storage::url($item);
-                    })->toArray();
-                }
+            if ($type === 'repeater') {
+                $value = collect($row->repeaterValue)->map(function ($repeater) use ($row) {
+                    if (in_array($row->repeaterType, ['file', 'image'])) {
+                        return (object) [
+                            'url' => Storage::url($repeater[$row->repeaterType . "Value"]),
+                            'meta' => $repeater["metaValue"],
+                        ];
+                    }
+                    return $repeater[$row->repeaterType . "Value"];
+                })->toArray();
             }
+
             return ['key' => $row->key, 'value' => $value];
-        }))->pluck('value', 'key')->toArray();
+        })->pluck('value', 'key')->toArray();
     }
+
 
     public function pageAttributes()
     {

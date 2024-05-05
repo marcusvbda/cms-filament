@@ -17,12 +17,14 @@ class PageAttribute extends Model
         'type',
         'booleanValue',
         'repeaterValue',
-        'repeaterType'
+        'repeaterType',
+        'metaValue'
     ];
 
     public $casts = [
-        'bolValue' => 'boolean',
-        'repeaterValue' => 'array'
+        'booleanValue' => 'boolean',
+        'repeaterValue' => 'array',
+        'metaValue' => 'array'
     ];
 
     public function page()

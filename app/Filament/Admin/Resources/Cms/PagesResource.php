@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Cms;
 use App\Filament\Admin\Resources\Cms\PagesResource\Pages;
 use App\Models\Page;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -101,6 +102,8 @@ class PagesResource extends Resource
                                     'editor' => ucfirst(__('editor')),
                                     'repeater' => ucfirst(__('repeater')),
                                 ])->default('text')->live(),
+                            KeyValue::make('metaValue')->visible(fn ($get) => in_array($get('type'), ['file', 'image']))
+                                ->label(ucfirst(__('meta')))->columnSpanFull(),
                             Toggle::make('booleanValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
                                 ->visible(fn ($get) => $get('type') === 'boolean'),
                             TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
@@ -116,10 +119,10 @@ class PagesResource extends Resource
                                 ->options([
                                     'text' => ucfirst(__('text')),
                                     'image' => ucfirst(__('image')),
+                                    'file' => ucfirst(__('file')),
                                 ])->default('text')->live()
                                 ->visible(fn ($get) => $get('type') === 'repeater'),
                             Repeater::make('repeaterValue')
-                                ->reorderable(false)
                                 ->label(ucfirst(__('items')))
                                 ->schema([
                                     TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))->distinct()
@@ -127,13 +130,22 @@ class PagesResource extends Resource
                                 ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'text'))
                                 ->columnSpanFull(),
                             Repeater::make('repeaterValue')
-                                ->reorderable(false)
                                 ->label(ucfirst(__('items')))
                                 ->schema([
+                                    KeyValue::make('metaValue')->label(ucfirst(__('meta')))->columnSpanFull(),
                                     FileUpload::make('imageValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
                                         ->downloadable()->imageEditor(),
                                 ])
                                 ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'image'))
+                                ->columnSpanFull(),
+                            Repeater::make('repeaterValue')
+                                ->label(ucfirst(__('items')))
+                                ->schema([
+                                    KeyValue::make('metaValue')->label(ucfirst(__('meta')))->columnSpanFull(),
+                                    FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                                        ->downloadable(),
+                                ])
+                                ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'file'))
                                 ->columnSpanFull()
                         ])
                         ->columns(2)
@@ -153,7 +165,7 @@ class PagesResource extends Resource
                     ->label(ucfirst(__("title")))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('slug')
+                TextColumn::make('blade')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('is_published')->searchable()->label(ucfirst(__('published')))
