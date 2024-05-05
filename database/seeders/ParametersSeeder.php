@@ -12,6 +12,13 @@ class ParametersSeeder extends Seeder
         Parameter::truncate();
 
         Parameter::create([
+            'key' => 'admin_route',
+            'label' => 'admin route',
+            'value' => 'admin',
+            'type' => 'text'
+        ]);
+
+        Parameter::create([
             'key' => 'app_name',
             'label' => 'application name',
             'value' => 'ORANGE',

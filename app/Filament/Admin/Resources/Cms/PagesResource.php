@@ -38,7 +38,7 @@ class PagesResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['title', 'slug'];
+        return ['title', 'blade'];
     }
 
     public static function scanDirForBladeFiles()
@@ -98,7 +98,6 @@ class PagesResource extends Resource
                                     'text' => ucfirst(__('text')),
                                     'boolean' => ucfirst(__('boolean')),
                                     'file' => ucfirst(__('file')),
-                                    'image' => ucfirst(__('image')),
                                     'editor' => ucfirst(__('editor')),
                                     'repeater' => ucfirst(__('repeater')),
                                 ])->default('text')->live(),
@@ -109,16 +108,13 @@ class PagesResource extends Resource
                             TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
                                 ->visible(fn ($get) => $get('type') === 'text'),
                             FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                                ->visible(fn ($get) => $get('type') === 'file')->downloadable(),
-                            FileUpload::make('imageValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                                ->visible(fn ($get) => $get('type') === 'image')->downloadable()->imageEditor(),
+                                ->visible(fn ($get) => $get('type') === 'file')->downloadable()->imageEditor(),
                             RichEditor::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
                                 ->visible(fn ($get) => $get('type') === 'editor'),
                             Select::make('repeaterType')->required()->label(ucfirst(__('type')))
                                 ->columnSpanFull()
                                 ->options([
                                     'text' => ucfirst(__('text')),
-                                    'image' => ucfirst(__('image')),
                                     'file' => ucfirst(__('file')),
                                 ])->default('text')->live()
                                 ->visible(fn ($get) => $get('type') === 'repeater'),
@@ -133,17 +129,8 @@ class PagesResource extends Resource
                                 ->label(ucfirst(__('items')))
                                 ->schema([
                                     KeyValue::make('metaValue')->label(ucfirst(__('meta')))->columnSpanFull(),
-                                    FileUpload::make('imageValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                                        ->downloadable()->imageEditor(),
-                                ])
-                                ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'image'))
-                                ->columnSpanFull(),
-                            Repeater::make('repeaterValue')
-                                ->label(ucfirst(__('items')))
-                                ->schema([
-                                    KeyValue::make('metaValue')->label(ucfirst(__('meta')))->columnSpanFull(),
                                     FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                                        ->downloadable(),
+                                        ->downloadable()->imageEditor()
                                 ])
                                 ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'file'))
                                 ->columnSpanFull()
@@ -178,13 +165,13 @@ class PagesResource extends Resource
                     }),
                 TextColumn::make('url')
                     ->getStateUsing(function ($record) {
-                        $slug = str_replace(".", "/", $record->slug);
-                        $url = $record->slug === "index" ? "/" : "/" . $slug;
+                        $slug = str_replace(".", "/", $record->blade);
+                        $url = $record->blade === "index" ? "/" : "/" . $slug;
                         return $url;
                     })
                     ->url(function ($record) {
-                        $slug = str_replace(".", "/", $record->slug);
-                        $url = $record->slug === "index" ? "/" : "/" . $slug;
+                        $slug = str_replace(".", "/", $record->blade);
+                        $url = $record->blade === "index" ? "/" : "/" . $slug;
                         return $url;
                     }, true)
             ])

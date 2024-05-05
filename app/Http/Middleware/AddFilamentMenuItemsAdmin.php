@@ -3,11 +3,13 @@
 namespace App\Http\Middleware;
 
 use App\Filament\Admin\Resources\Settings\ParametersResource;
+use App\Models\Parameter;
 use Closure;
 use Filament\Navigation\MenuItem;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Auth;
+use DB;
 
 class AddFilamentMenuItemsAdmin
 {
@@ -18,8 +20,10 @@ class AddFilamentMenuItemsAdmin
         }
 
         if (ParametersResource::canAccess()) {
+            $tableParamsExists = DB::select("SELECT * FROM information_schema.tables WHERE table_name = 'parameters'");
+            $prefix =  $tableParamsExists ? (@Parameter::find('admin_route')?->value ?? "admin") : "admin";
             filament()->getCurrentPanel()->userMenuItems([
-                MenuItem::make()->label(ucfirst(__('parameters')))->icon('feathericon-settings')->url('/admin/settings/parameters')
+                MenuItem::make()->label(ucfirst(__('parameters')))->icon('feathericon-settings')->url("/$prefix/settings/parameters")
             ]);
         }
 

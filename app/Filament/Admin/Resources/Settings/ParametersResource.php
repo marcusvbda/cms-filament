@@ -65,13 +65,13 @@ class ParametersResource extends Resource
                                 </div>
                             BLADE;
                         } else {
-                            return ucfirst(__($record->label));
+                            return __($record->value);
                         }
                     }),
             ])
             ->actions([
                 EditAction::make()
-                    ->form(function (Setting $record) {
+                    ->form(function ($record) {
                         return match ($record->type) {
                             'select' => [
                                 Select::make('value')

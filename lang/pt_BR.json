@@ -29,5 +29,6 @@
     "boolean": "booleano",
     "file": "arquivo",
     "image": "imagem",
-    "repeater": "repetidor"
+    "repeater": "repetidor",
+    "admin route": "rota de administração"
 }

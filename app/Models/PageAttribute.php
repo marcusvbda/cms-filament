@@ -13,7 +13,6 @@ class PageAttribute extends Model
         'key',
         'textValue',
         'fileValue',
-        'imageValue',
         'type',
         'booleanValue',
         'repeaterValue',

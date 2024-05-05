@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('type');
             $table->longText('textValue')->nullable();
             $table->longText('fileValue')->nullable();
-            $table->longText('imageValue')->nullable();
             $table->boolean('booleanValue')->nullable();
             $table->text('metaValue')->nullable();
             $table->text('repeaterType')->nullable();

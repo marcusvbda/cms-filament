@@ -35,7 +35,8 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->default()
-            ->path('admin')
+            ->path($tableParamsExists ? (@Parameter::find('admin_route')?->value ?? "admin") : "admin")
+            ->spa()
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->topNavigation($menuType === "topbar")
             ->brandName($tableParamsExists ?  (Parameter::find('app_name')->value ?? "Filament") : "Filament")
