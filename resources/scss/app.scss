@@ -1,5 +1,29 @@
 @import "bootstrap/scss/bootstrap";
+@import "swiper/css";
 
-.red {
-    color: red;
+body {
+    padding-top: 64px;
+}
+
+.navbar {
+    transition: all 0.5s;
+}
+
+.hero {
+    input {
+        border-radius: var(--bs-border-radius) !important;
+    }
+
+    .carousel-item {
+        min-height: 80px;
+    }
+}
+
+.swiper {
+    opacity: 0;
+    transition: 0.5s;
+
+    &.swiper-initialized {
+        opacity: 1;
+    }
 }

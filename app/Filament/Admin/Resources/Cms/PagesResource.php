@@ -54,14 +54,14 @@ class PagesResource extends Resource
         foreach ($iterator as $file) {
             if ($file->isFile() && $file->getExtension() === 'php') {
                 $relativePath = str_replace([$viewsPath, '.blade.php'], '', $file->getRealPath());
-                $bladeName = str_replace(DIRECTORY_SEPARATOR, '.', $relativePath);
-                $bladeFiles[] = basename($bladeName);
+                $bladeName = ltrim(str_replace(DIRECTORY_SEPARATOR, '.', $relativePath), '.');
+                if (!Str::startsWith($bladeName, '_')) {
+                    $bladeFiles[] = $bladeName;
+                }
             }
         }
 
-        $bladeFiles = array_map(function ($name) {
-            return ltrim($name, '.');
-        }, $bladeFiles);
+        $bladeFiles = array_map(fn ($name) => ltrim($name, '.'), $bladeFiles);
 
         return $bladeFiles;
     }

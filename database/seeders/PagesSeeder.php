@@ -28,19 +28,19 @@ class PagesSeeder extends Seeder
         $page->pageAttributes()->create([
             'key' => 'hero_title',
             'type' => 'text',
-            'textValue' => 'Enhance your website design with Martex'
+            'textValue' => 'enhance your website design with Martex'
         ]);
 
         $page->pageAttributes()->create([
             'key' => 'hero_subtitle',
             'type' => 'text',
-            'textValue' => 'Mauris donec ociis diam magnis sapien sagittis sapien tempor volute gravida aliquet tortor undo aliquet an egestas in magna egestas sapien quaerat'
+            'textValue' => 'mauris donec ociis diam magnis sapien sagittis sapien tempor volute gravida aliquet tortor undo aliquet an egestas in magna egestas sapien quaerat'
         ]);
 
         $page->pageAttributes()->create([
             'key' => 'hero_input_placeholder',
             'type' => 'text',
-            'textValue' => 'Enter your email here'
+            'textValue' => 'enter your email here'
         ]);
 
         $page->pageAttributes()->create([
