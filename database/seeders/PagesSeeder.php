@@ -26,6 +26,15 @@ class PagesSeeder extends Seeder
         ]);
 
         $page->pageAttributes()->create([
+            'key' => 'logo',
+            'type' => 'file',
+            'fileValue' => 'logo.png',
+            'metaValue' => [
+                'alt' => 'logo',
+            ]
+        ]);
+
+        $page->pageAttributes()->create([
             'key' => 'hero_title',
             'type' => 'text',
             'textValue' => 'enhance your website design with Martex'

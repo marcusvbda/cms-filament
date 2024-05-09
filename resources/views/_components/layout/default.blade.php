@@ -8,6 +8,9 @@
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     <title>Gravity labs | @yield('title')</title>
 </head>
+@php
+    dd($page->pageAttributes);
+@endphp
 
 <body>
     @yield('content')
