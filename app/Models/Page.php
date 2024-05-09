@@ -20,7 +20,7 @@ class Page extends Model
 
     public function getProcessedAttributes()
     {
-        return collect($this->pageAttributes)->map(function ($row) {
+        return (object)collect($this->pageAttributes)->map(function ($row) {
             $type = match ($row->type) {
                 'text', 'editor' => 'text',
                 default => $row->type,
@@ -32,7 +32,7 @@ class Page extends Model
             if (in_array($type, ['file', 'image'])) {
                 $value = (object) [
                     'url' => Storage::url($value),
-                    'meta' => $row->metaValue,
+                    'meta' => (object)$row->metaValue,
                 ];
             }
 

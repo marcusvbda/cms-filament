@@ -9,7 +9,7 @@
     <title>Gravity labs | @yield('title')</title>
 </head>
 @php
-    dd($attributes);
+    // dd($attributes);
 @endphp
 
 <body>
