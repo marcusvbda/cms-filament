@@ -9,6 +9,8 @@ body {
 
 .navbar {
     transition: all 0.5s;
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(20px);
 
     .navbar-toggler {
         order: 1;
