@@ -1,5 +1,5 @@
 @php
-    $currentLocale = app()->getLocale() ?? 'en';
+    $currentLocale = str_replace('_', '-', app()->getLocale() ?? 'en');
 @endphp
 
 <!doctype html>
