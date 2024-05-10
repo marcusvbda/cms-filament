@@ -38,7 +38,7 @@ class PagesSeeder extends Seeder
         $page->pageAttributes()->create([
             'key' => 'hero_title',
             'type' => 'text',
-            'textValue' => 'enhance your website design with Martex'
+            'textValue' => 'enhance your website design with martex'
         ]);
 
         $page->pageAttributes()->create([
