@@ -12,6 +12,7 @@
     "draft posts": "posts rascunho",
     "setting": "configuração",
     "settings": "configurações",
+    "title": "título",
     "value": "valor",
     "application name": "nome da aplicação",
     "menu type": "tipo de menu",
@@ -30,5 +31,7 @@
     "file": "arquivo",
     "image": "imagem",
     "repeater": "repetidor",
-    "admin route": "rota de administração"
+    "admin route": "rota de administração",
+    "yes": "sim",
+    "no": "não"
 }

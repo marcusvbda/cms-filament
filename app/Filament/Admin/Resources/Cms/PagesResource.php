@@ -132,13 +132,17 @@ class PagesResource extends Resource
                     ->label(ucfirst(__("title")))
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('type')
+                    ->label(ucfirst(__("type")))
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('slug')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('is_published')->searchable()->label(ucfirst(__('published')))
                     ->badge()
                     ->getStateUsing(function ($record) {
-                        return ucfirst(__($record->is_published ? 'published' : 'draft'));
+                        return ucfirst(__($record->is_published ? 'yes' : 'no'));
                     })
                     ->color(function ($record) {
                         return $record->is_published ? 'success' : 'danger';

@@ -21,7 +21,8 @@ class Page extends Model
 
     public function getProcessedAttributes()
     {
-        return (object)collect($this->pageAttributes)->map(function ($row) {
+        $appUrl = config("app.url");
+        return (object)collect($this->pageAttributes)->map(function ($row) use ($appUrl) {
             $type = match ($row->type) {
                 'text', 'editor' => 'text',
                 default => $row->type,
@@ -32,16 +33,16 @@ class Page extends Model
 
             if (in_array($type, ['file', 'image'])) {
                 $value = (object) [
-                    'url' => Storage::url($value),
+                    'url' => $appUrl . Storage::url($value),
                     'meta' => (object)$row->metaValue,
                 ];
             }
 
             if ($type === 'repeater') {
-                $value = collect($row->repeaterValue)->map(function ($repeater) use ($row) {
+                $value = collect($row->repeaterValue)->map(function ($repeater) use ($row, $appUrl) {
                     if (in_array($row->repeaterType, ['file', 'image'])) {
                         return (object) [
-                            'url' => Storage::url($repeater[$row->repeaterType . "Value"]),
+                            'url' => $appUrl . Storage::url($repeater[$row->repeaterType . "Value"]),
                             'meta' => (object)$repeater["metaValue"],
                         ];
                     }
