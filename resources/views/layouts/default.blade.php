@@ -8,9 +8,9 @@
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     <title>Gravity labs | @yield('title')</title>
 </head>
-@php
+{{-- @php
     // dd($attributes);
-@endphp
+@endphp --}}
 
 <body>
     @yield('content')

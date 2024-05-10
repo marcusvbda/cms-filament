@@ -12,7 +12,8 @@ class Page extends Model
 
     protected $fillable = [
         'title',
-        'blade',
+        'type',
+        'slug',
         'is_published',
         'meta',
         'attrs'
@@ -41,7 +42,7 @@ class Page extends Model
                     if (in_array($row->repeaterType, ['file', 'image'])) {
                         return (object) [
                             'url' => Storage::url($repeater[$row->repeaterType . "Value"]),
-                            'meta' => $repeater["metaValue"],
+                            'meta' => (object)$repeater["metaValue"],
                         ];
                     }
                     return $repeater[$row->repeaterType . "Value"];

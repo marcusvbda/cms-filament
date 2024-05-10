@@ -38,52 +38,32 @@ class PagesResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['title', 'blade'];
-    }
-
-    public static function scanDirForBladeFiles()
-    {
-        $bladeFiles = [];
-        $viewsPath = resource_path('views');
-
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($viewsPath, RecursiveDirectoryIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::SELF_FIRST
-        );
-
-        foreach ($iterator as $file) {
-            if ($file->isFile() && $file->getExtension() === 'php') {
-                $relativePath = str_replace([$viewsPath, '.blade.php'], '', $file->getRealPath());
-                $bladeName = ltrim(str_replace(DIRECTORY_SEPARATOR, '.', $relativePath), '.');
-                if (!Str::startsWith($bladeName, '_')) {
-                    $bladeFiles[] = $bladeName;
-                }
-            }
-        }
-
-        $bladeFiles = array_map(fn ($name) => ltrim($name, '.'), $bladeFiles);
-
-        return $bladeFiles;
+        return ['title', 'slug'];
     }
 
     public static function form(Form $form): Form
     {
-        $bladeFiles = self::scanDirForBladeFiles();
-        $bladeFiles = array_combine($bladeFiles, $bladeFiles);
-
         return $form
             ->schema([
                 Section::make([
-                    Toggle::make('is_published')->label(ucfirst(__('published')))->default(false),
+                    Toggle::make('is_published')->label(ucfirst(__('published')))->default(false)->columnSpanFull(),
                     TextInput::make('title')
                         ->required()
                         ->translateLabel()
-                        ->maxLength(255),
-                    Select::make('blade')
+                        ->maxLength(255)
+                        ->columnSpanFull(),
+                    Select::make('type')
+                        ->label(ucfirst(__('type')))
+                        ->required()
+                        ->options([
+                            'blade' => ucfirst('blade'),
+                            'api' => ucfirst('api')
+                        ])->default('page')->columnSpan(1),
+                    TextInput::make('slug')
                         ->unique(ignoreRecord: true)
                         ->required()
-                        ->options($bladeFiles),
-                ]),
+                        ->columnSpan(1),
+                ])->columns(2),
                 Section::make([
                     Repeater::make('pageAttributes')
                         ->reorderable(false)
@@ -152,7 +132,7 @@ class PagesResource extends Resource
                     ->label(ucfirst(__("title")))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('blade')
+                TextColumn::make('slug')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('is_published')->searchable()->label(ucfirst(__('published')))

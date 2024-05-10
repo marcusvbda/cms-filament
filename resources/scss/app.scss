@@ -1,8 +1,11 @@
 @import "bootstrap/scss/bootstrap";
 @import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 
 body {
     padding-top: 64px;
+    background-color: #f8f9fa;
 }
 
 .navbar {

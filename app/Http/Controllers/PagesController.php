@@ -8,12 +8,11 @@ class PagesController extends Controller
 {
     public function show($slug = "index")
     {
-        $blade  = str_replace("/", ".", $slug);
-        $page = Page::where('blade', $blade)->where("is_published", true)->firstOrFail();
-        if (!view()->exists($page->blade)) abort(404);
+        $slug  = str_replace("/", ".", $slug);
+        $page = Page::where('slug', $slug)->where("is_published", true)->firstOrFail();
         $attributes = $page->getProcessedAttributes();
-        $responseType = request()->responseType ?? 'blade';
-        if ($responseType == 'json') return response()->json(['title' => $page->title, 'attributes' => $attributes]);
-        return view($page->blade, compact('page', 'attributes'))->render();
+        if ($page->type === 'api') return response()->json(['title' => $page->title, 'attributes' => $attributes]);
+        if (!view()->exists($page->slug)) abort(404);
+        return view($page->slug, compact('page', 'attributes'))->render();
     }
 }

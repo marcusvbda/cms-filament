@@ -21,7 +21,8 @@ class PagesSeeder extends Seeder
     {
         $page = Page::create([
             'title' => 'Home',
-            'blade' => 'index',
+            'slug' => 'index',
+            'type' => 'blade',
             'is_published' => true
         ]);
 
@@ -56,6 +57,20 @@ class PagesSeeder extends Seeder
             'key' => 'hero_input_button',
             'type' => 'text',
             'textValue' => 'subscribe'
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'hero_swiper_brands',
+            'type' => 'repeater',
+            'repeaterType' => 'file',
+            'repeaterValue' => array_map(function ($index) {
+                return [
+                    'fileValue' => "brand-$index.png",
+                    'metaValue' => [
+                        'alt' => 'brand ' . $index
+                    ]
+                ];
+            }, range(1, 10))
         ]);
     }
 }
