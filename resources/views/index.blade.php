@@ -12,5 +12,6 @@
     </header>
     <main>
         @include('components.pages.home.hero')
+        @include('components.pages.home.description-banner')
     </main>
 @endsection

@@ -3,9 +3,9 @@
 @endphp
 
 <section class="hero" style="--hero-bg : url({{ $attributes->hero_background->url }})">
-    <div class="p-3 p-md-5 mb-4 bg-light rounded-3">
+    <div class="p-3 p-md-5">
         <div class="container-fluid py-5">
-            <div class="row d-flex align-items-center justify-content-center">
+            <div class="row d-flex align-items-center justify-content-center" data-aos="fade-in">
                 <div class="col-12 col-md-10 text-center">
                     <h1 class="display-3 fw-bold mb-4 text-center">
                         {{ ucfirst(BladeTranslator::__($attributes->hero_title)) }}</h1>
@@ -23,7 +23,8 @@
                         <div class="swiper-wrapper">
                             @foreach ($attributes->hero_swiper_brands as $slide)
                                 <div class="swiper-slide">
-                                    <img src="{{ $slide->url }}" alt="{{ $slide->meta->alt }}" height="70">
+                                    <img loading="lazy" src="{{ $slide->url }}" alt="{{ $slide->meta->alt }}"
+                                        height="70">
                                 </div>
                             @endforeach
                         </div>

@@ -80,5 +80,21 @@ class PagesSeeder extends Seeder
                 ];
             }, range(1, 10))
         ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'description_banners',
+            'type' => 'repeater',
+            'repeaterType' => 'file',
+            'repeaterValue' => array_map(function ($index) {
+                return [
+                    'fileValue' => "desc-banner-$index.png",
+                    'metaValue' => [
+                        'title' => 'lorem ipsum',
+                        'description' => 'luctus egestas augue undo ultrice aliquam in lacus congue dapibus',
+                        'alt' => 'description banner ' . $index
+                    ]
+                ];
+            }, range(1, 3))
+        ]);
     }
 }

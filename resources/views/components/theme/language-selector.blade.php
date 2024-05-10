@@ -3,13 +3,13 @@
         <li class="nav-item ">
             <a class="nav-link {{ $currentLocale == 'en' ? 'active' : '' }}" aria-current="page"
                 href="{{ route('set-language', ['lang' => 'en']) }}">
-                <img src="{{ asset('images/flags/usa.png') }}" alt="EN" />
+                <img loading="lazy" src="{{ asset('images/flags/usa.png') }}" alt="EN" />
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ $currentLocale == 'pt_BR' ? 'active' : '' }}" aria-current="page"
                 href="{{ route('set-language', ['lang' => 'pt_BR']) }}">
-                <img src="{{ asset('images/flags/brazil.png') }}" alt="BR" />
+                <img loading="lazy" src="{{ asset('images/flags/brazil.png') }}" alt="BR" />
             </a>
         </li>
     </ul>

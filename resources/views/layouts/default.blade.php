@@ -16,7 +16,7 @@
     <title>Gravity labs | @yield('title')</title>
 </head>
 
-<body class="bg-body-tertiary">
+<body>
     @yield('content')
 </body>
 
