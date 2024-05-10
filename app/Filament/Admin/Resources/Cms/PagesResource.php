@@ -10,6 +10,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -49,8 +50,12 @@ class PagesResource extends Resource
                     Toggle::make('is_published')->label(ucfirst(__('published')))->default(false)->columnSpanFull(),
                     TextInput::make('title')
                         ->required()
-                        ->translateLabel()
+                        ->label(ucfirst(__('title')))
                         ->maxLength(255)
+                        ->columnSpanFull(),
+                    Textarea::make('description')
+                        ->label(ucfirst(__('description')))
+                        ->rows(5)
                         ->columnSpanFull(),
                     Select::make('type')
                         ->label(ucfirst(__('type')))

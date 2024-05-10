@@ -15,4 +15,10 @@ class PagesController extends Controller
         if (!view()->exists($page->slug)) abort(404);
         return view($page->slug, compact('page', 'attributes'))->render();
     }
+
+    public function setLanguage($lang)
+    {
+        session()->put('locale', $lang);
+        return redirect()->back();
+    }
 }

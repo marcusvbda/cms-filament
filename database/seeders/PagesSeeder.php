@@ -20,7 +20,8 @@ class PagesSeeder extends Seeder
     public function createHome(): void
     {
         $page = Page::create([
-            'title' => 'Home',
+            'title' => 'home',
+            'description' => 'lorem ipsum',
             'slug' => 'index',
             'type' => 'blade',
             'is_published' => true
@@ -57,6 +58,13 @@ class PagesSeeder extends Seeder
             'key' => 'hero_input_button',
             'type' => 'text',
             'textValue' => 'subscribe'
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'hero_background',
+            'type' => 'file',
+            'fileValue' => 'hero-bg.jpeg',
+            'metaValue' => []
         ]);
 
         $page->pageAttributes()->create([

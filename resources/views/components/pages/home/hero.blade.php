@@ -2,7 +2,7 @@
     use App\Helpers\BladeTranslator;
 @endphp
 
-<section class="hero">
+<section class="hero" style="--hero-bg : url({{ $attributes->hero_background->url }})">
     <div class="p-3 p-md-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">
             <div class="row d-flex align-items-center justify-content-center">

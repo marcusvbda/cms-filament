@@ -5,11 +5,47 @@
 
 body {
     padding-top: 64px;
-    background-color: #f8f9fa;
 }
 
 .navbar {
     transition: all 0.5s;
+
+    .navbar-toggler {
+        order: 1;
+    }
+
+    .language-selector {
+        order: 0;
+        .navbar-nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            .nav-link {
+                padding: 0 5px;
+                opacity: 0.4;
+                cursor: pointer;
+                transition: 0.5s;
+
+                img {
+                    height: 30px;
+                    width: 30px;
+                    max-height: 30px;
+                    max-width: 30px;
+                }
+
+                &:hover {
+                    opacity: 0.7;
+                    transform: scale(1.1);
+                }
+
+                &.active {
+                    opacity: 1;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
 }
 
 .hero {
@@ -19,6 +55,13 @@ body {
 
     .carousel-item {
         min-height: 80px;
+    }
+
+    > div {
+        background-image: var(--hero-bg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
     }
 }
 

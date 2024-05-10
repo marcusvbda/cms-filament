@@ -12,5 +12,5 @@ $ ./vendor/bin/sail up -d
 
 ## 4 - Start aplication
 ```
-$ php artisan make:filament-user 
+$ php artisan migrate:fresh && php artisan make:filament-user
 ```

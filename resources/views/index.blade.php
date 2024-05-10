@@ -1,10 +1,10 @@
 @extends('layouts.default')
+@php
+    use App\Helpers\BladeTranslator;
+@endphp
 
-@section('meta')
-    {{--  --}}
-@endsection
-
-@section('title', __($page->title))
+@section('title', ucfirst(BladeTranslator::__($page->title)))
+@section('description', ucfirst(BladeTranslator::__($page->description)))
 
 @section('content')
     <header>
