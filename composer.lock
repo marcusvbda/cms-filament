@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bda3efc0dc6aa35ab393298d22ba4fe8",
+    "content-hash": "b14ad1e1d22b6535ea01f33db0b51c1d",
     "packages": [
         {
             "name": "andreiio/blade-remix-icon",
@@ -3577,16 +3577,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.4.11",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0"
+                "reference": "54dd265c17f7b5200627eb9690590e7cbbad1027"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0",
-                "reference": "8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/54dd265c17f7b5200627eb9690590e7cbbad1027",
+                "reference": "54dd265c17f7b5200627eb9690590e7cbbad1027",
                 "shasum": ""
             },
             "require": {
@@ -3601,7 +3601,7 @@
             },
             "require-dev": {
                 "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^10.0|^11.0",
+                "laravel/framework": "^10.15.0|^11.0",
                 "laravel/prompts": "^0.1.6",
                 "mockery/mockery": "^1.3.1",
                 "orchestra/testbench": "^8.21.0|^9.0",
@@ -3641,7 +3641,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.4.11"
+                "source": "https://github.com/livewire/livewire/tree/v3.4.12"
             },
             "funding": [
                 {
@@ -3649,7 +3649,83 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-24T12:14:15+00:00"
+            "time": "2024-05-02T17:10:37+00:00"
+        },
+        {
+            "name": "mallardduck/blade-boxicons",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mallardduck/blade-boxicons.git",
+                "reference": "de0d53e6bd08bc21973487e84681b71e2f00b889"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mallardduck/blade-boxicons/zipball/de0d53e6bd08bc21973487e84681b71e2f00b889",
+                "reference": "de0d53e6bd08bc21973487e84681b71e2f00b889",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.5",
+                "php": "^7.4 || ^8.0"
+            },
+            "replace": {
+                "jfvoliveira/blade-boxicons": "1.1.2"
+            },
+            "require-dev": {
+                "ext-dom": "*",
+                "orchestra/testbench": "^6.0 || ^7.0 || ^8.0",
+                "phpunit/phpunit": "^8.5.14 || ^9.0",
+                "spatie/phpunit-snapshot-assertions": "^4.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MallardDuck\\BladeBoxicons\\BladeBoxiconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MallardDuck\\BladeBoxicons\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Pock",
+                    "homepage": "https://danpock.me",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "João Oliveira",
+                    "email": "joao@joliveira.pt",
+                    "homepage": "https://joliveira.pt",
+                    "role": "Original Developer"
+                }
+            ],
+            "description": "A package to easily make use of Boxicons in your Laravel Blade views.",
+            "homepage": "https://github.com/mallardduck/blade-boxicons",
+            "keywords": [
+                "Blade UI Kit",
+                "Boxicons",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/mallardduck/blade-boxicons/issues",
+                "source": "https://github.com/mallardduck/blade-boxicons/tree/2.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mallardduck",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-16T16:52:16+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -3717,6 +3793,71 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
             },
             "time": "2024-03-31T07:05:07+00:00"
+        },
+        {
+            "name": "mckenziearts/blade-untitledui-icons",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mckenziearts/blade-untitledui-icons.git",
+                "reference": "46c98a2f5c8fa41960a997b2e2cb0481e431240d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mckenziearts/blade-untitledui-icons/zipball/46c98a2f5c8fa41960a997b2e2cb0481e431240d",
+                "reference": "46c98a2f5c8fa41960a997b2e2cb0481e431240d",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.6",
+                "illuminate/support": "^9.0|^10.0|^11.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.0|^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mckenziearts\\BladeUntitledUIIcons\\BladeUntitledUIIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mckenziearts\\BladeUntitledUIIcons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arthur Monney",
+                    "homepage": "https://arthurmonney.me"
+                }
+            ],
+            "description": "A package to easily make use of UntitledUI icons in your Laravel Blade views.",
+            "homepage": "https://github.com/mckenziearts/blade-untitledui-icons",
+            "keywords": [
+                "Untitled UI",
+                "blade",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/mckenziearts/blade-untitledui-icons/issues",
+                "source": "https://github.com/mckenziearts/blade-untitledui-icons/tree/v1.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mckenziearts",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-05T11:39:07+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4220,16 +4361,16 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v4.23.0",
+            "version": "v4.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "28f6a0e45acc3377f34c26cc3866e21f0447e0c8"
+                "reference": "51f2a627d4cdcdb06eb451c6f434daeb190c4afb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/28f6a0e45acc3377f34c26cc3866e21f0447e0c8",
-                "reference": "28f6a0e45acc3377f34c26cc3866e21f0447e0c8",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/51f2a627d4cdcdb06eb451c6f434daeb190c4afb",
+                "reference": "51f2a627d4cdcdb06eb451c6f434daeb190c4afb",
                 "shasum": ""
             },
             "require": {
@@ -4243,13 +4384,13 @@
             },
             "require-dev": {
                 "ext-zlib": "*",
-                "friendsofphp/php-cs-fixer": "^3.46.0",
-                "infection/infection": "^0.27.9",
+                "friendsofphp/php-cs-fixer": "^3.56.0",
+                "infection/infection": "^0.28.1",
                 "phpbench/phpbench": "^1.2.15",
-                "phpstan/phpstan": "^1.10.55",
-                "phpstan/phpstan-phpunit": "^1.3.15",
-                "phpstan/phpstan-strict-rules": "^1.5.2",
-                "phpunit/phpunit": "^10.5.5"
+                "phpstan/phpstan": "^1.10.67",
+                "phpstan/phpstan-phpunit": "^1.3.16",
+                "phpstan/phpstan-strict-rules": "^1.5.5",
+                "phpunit/phpunit": "^10.5.20"
             },
             "suggest": {
                 "ext-iconv": "To handle non UTF-8 CSV files (if \"php-mbstring\" is not already installed or is too limited)",
@@ -4297,7 +4438,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v4.23.0"
+                "source": "https://github.com/openspout/openspout/tree/v4.24.0"
             },
             "funding": [
                 {
@@ -4309,7 +4450,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-09T09:30:37+00:00"
+            "time": "2024-05-10T09:06:16+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -4640,20 +4781,20 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35"
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0.0",
+                "php": ">=7.1",
                 "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
@@ -4677,7 +4818,7 @@
                     "homepage": "https://www.php-fig.org/"
                 }
             ],
-            "description": "Common interfaces for PSR-7 HTTP message factories",
+            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
             "keywords": [
                 "factory",
                 "http",
@@ -4689,9 +4830,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-factory"
             },
-            "time": "2023-04-10T20:10:41+00:00"
+            "time": "2024-04-15T12:06:14+00:00"
         },
         {
             "name": "psr/http-message",
@@ -5930,23 +6071,23 @@
         },
         {
             "name": "symfony/html-sanitizer",
-            "version": "v6.4.7",
+            "version": "v7.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/html-sanitizer.git",
-                "reference": "0ff5d77e3160c15db3dbc3515a4f0143e3e4a218"
+                "reference": "a9162f2ca36a200b666f7cd1b1b2f28d1b7dc55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/html-sanitizer/zipball/0ff5d77e3160c15db3dbc3515a4f0143e3e4a218",
-                "reference": "0ff5d77e3160c15db3dbc3515a4f0143e3e4a218",
+                "url": "https://api.github.com/repos/symfony/html-sanitizer/zipball/a9162f2ca36a200b666f7cd1b1b2f28d1b7dc55d",
+                "reference": "a9162f2ca36a200b666f7cd1b1b2f28d1b7dc55d",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "league/uri": "^6.5|^7.0",
                 "masterminds/html5": "^2.7.2",
-                "php": ">=8.1"
+                "php": ">=8.2"
             },
             "type": "library",
             "autoload": {
@@ -5979,7 +6120,7 @@
                 "sanitizer"
             ],
             "support": {
-                "source": "https://github.com/symfony/html-sanitizer/tree/v6.4.7"
+                "source": "https://github.com/symfony/html-sanitizer/tree/v7.0.7"
             },
             "funding": [
                 {
@@ -5995,7 +6136,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:22:46+00:00"
+            "time": "2024-04-18T09:29:19+00:00"
         },
         {
             "name": "symfony/http-foundation",

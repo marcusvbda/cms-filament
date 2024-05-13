@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Access;
+namespace App\Filament\Admin\Resources\Settings;
 
-use App\Filament\Admin\Resources\Access\UserResource\Pages;
+use App\Filament\Admin\Resources\Settings\UserResource\Pages;
 use App\Models\User;
-// use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -12,17 +11,13 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Auth;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $navigationIcon = 'heroicon-o-user';
-
-    public static function getNavigationGroup(): ?string
-    {
-        return ucfirst(__('access'));
-    }
 
     public static function getLabel(): ?string
     {
@@ -86,5 +81,20 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Auth::user()->isAdmin();
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()->isAdmin();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return Auth::user()->isAdmin();
     }
 }

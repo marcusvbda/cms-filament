@@ -100,7 +100,7 @@ class ParametersResource extends Resource
         return false;
     }
 
-    public static function canDelete(Model $record): bool
+    public static function canDeleteAny(): bool
     {
         return false;
     }
