@@ -154,13 +154,13 @@ class PagesResource extends Resource
                     }),
                 TextColumn::make('url')
                     ->getStateUsing(function ($record) {
-                        $slug = str_replace(".", "/", $record->blade);
-                        $url = $record->blade === "index" ? "/" : "/" . $slug;
+                        $slug = str_replace(".", "/", $record->slug);
+                        $url = $record->slug === "index" ? "/" : "/" . $slug;
                         return $url;
                     })
                     ->url(function ($record) {
-                        $slug = str_replace(".", "/", $record->blade);
-                        $url = $record->blade === "index" ? "/" : "/" . $slug;
+                        $slug = str_replace(".", "/", $record->slug);
+                        $url = $record->slug === "index" ? "/" : "/" . $slug;
                         return $url;
                     }, true)
             ])

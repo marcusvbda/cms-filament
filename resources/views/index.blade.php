@@ -3,8 +3,8 @@
     use App\Helpers\BladeTranslator;
 @endphp
 
-@section('title', ucfirst(BladeTranslator::__($page->title)))
-@section('description', ucfirst(BladeTranslator::__($page->description)))
+@section('title', ucfirst(BladeTranslator::__(data_get($page, 'title'))))
+@section('description', ucfirst(BladeTranslator::__(data_get($page, 'description'))))
 
 @section('content')
     <header>

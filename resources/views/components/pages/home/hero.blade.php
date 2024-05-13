@@ -8,23 +8,24 @@
             <div class="row d-flex align-items-center justify-content-center" data-aos="fade-in">
                 <div class="col-12 col-md-10 text-center">
                     <h1 class="display-3 fw-bold mb-4 text-center">
-                        {{ ucfirst(BladeTranslator::__($attributes->hero_title)) }}</h1>
-                    <p class="fs-5 text-muted pb-5">{{ ucfirst(BladeTranslator::__($attributes->hero_subtitle)) }}</p>
+                        {{ ucfirst(BladeTranslator::__(data_get($attributes, 'hero_title'))) }}</h1>
+                    <p class="fs-5 text-muted pb-5">
+                        {{ ucfirst(BladeTranslator::__(data_get($attributes, 'hero_subtitle'))) }}</p>
                     <div class="form-group input-group my-5 pb-4">
                         <input class="input-email form-control me-3" type="email"
-                            placeholder="{{ ucfirst(BladeTranslator::__($attributes->hero_input_placeholder)) }}"
+                            placeholder="{{ ucfirst(BladeTranslator::__(data_get($attributes, 'hero_input_placeholder'))) }}"
                             required="required">
                         <span class="input-group-btn">
                             <button class="btn btn-primary btn-lg"
-                                type="button">{{ ucfirst(BladeTranslator::__($attributes->hero_input_button)) }}</button>
+                                type="button">{{ ucfirst(BladeTranslator::__(data_get($attributes, 'hero_input_button'))) }}</button>
                         </span>
                     </div>
                     <div class="swiper mt-4" id="hero-swiper">
                         <div class="swiper-wrapper">
-                            @foreach ($attributes->hero_swiper_brands as $slide)
+                            @foreach (data_get($attributes, 'hero_swiper_brands', []) as $slide)
                                 <div class="swiper-slide">
-                                    <img loading="lazy" src="{{ $slide->url }}" alt="{{ $slide->meta->alt }}"
-                                        height="70">
+                                    <img loading="lazy" src="{{ data_get($slide, 'url') }}"
+                                        alt="{{ data_get($slide, 'meta.alt') }}" height="70">
                                 </div>
                             @endforeach
                         </div>

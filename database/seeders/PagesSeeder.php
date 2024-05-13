@@ -96,5 +96,26 @@ class PagesSeeder extends Seeder
                 ];
             }, range(1, 3))
         ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'banner_description_title',
+            'type' => 'text',
+            'textValue' => 'affordable solutions for all your creativity needs'
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'banner_description_subtitle',
+            'type' => 'text',
+            'textValue' => 'aliquam a augue suscipit luctus neque purus ipsum neque diam dolor primis libero tempus, blandit and cursus varius and magnis sodales'
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'banner_description_banner',
+            'type' => 'file',
+            'fileValue' => 'desc-banner-banner.png',
+            'metaValue' => [
+                'alt' => 'banner description'
+            ]
+        ]);
     }
 }

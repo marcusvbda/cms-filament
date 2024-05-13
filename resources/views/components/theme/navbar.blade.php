@@ -6,8 +6,8 @@
 <nav class="navbar navbar-expand-lg bg-white fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img loading="lazy" src="{{ $attributes->logo->url }}" width="163"
-                alt="{{ $attributes->logo->meta->alt }}" />
+            <img loading="lazy" src="{{ data_get($attributes, 'logo.url') }}" width="163"
+                alt="{{ data_get($attributes, 'logo.meta.alt') }}" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
