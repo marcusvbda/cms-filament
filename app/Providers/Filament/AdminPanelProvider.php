@@ -46,6 +46,8 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->default()
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('30s')
             ->path($tableParamsExists ? (@Parameter::find('admin_route')?->value ?? "admin") : "admin")
             ->spa()
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
