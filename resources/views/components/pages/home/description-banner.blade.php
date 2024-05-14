@@ -24,7 +24,7 @@
                     <p class="fs-5 text-muted" data-aos="fade-left">
                         {{ ucfirst(BladeTranslator::__(data_get($attributes, 'banner_description_subtitle'))) }}
                     </p>
-                    <img class="w-100" data-aos="fade-up"
+                    <img loading="lazy" class="w-100" data-aos="fade-up"
                         src="{{ data_get($attributes, 'banner_description_banner.url') }}"
                         alt="{{ data_get($attributes, 'banner_description_banner.meta.alt') }}" />
                 </div>

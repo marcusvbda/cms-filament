@@ -13,5 +13,6 @@
     <main>
         @include('components.pages.home.hero')
         @include('components.pages.home.description-banner')
+        @include('components.pages.home.icons-section')
     </main>
 @endsection

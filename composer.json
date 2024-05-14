@@ -12,6 +12,7 @@
         "andreiio/blade-remix-icon": "^3.2",
         "bezhansalleh/filament-language-switch": "^3.1",
         "brunocfalcao/blade-feather-icons": "^4.0",
+        "codeat3/blade-unicons": "^1.8",
         "filament/filament": "^3.2",
         "guava/filament-nested-resources": "^1.0",
         "guzzlehttp/guzzle": "^7.2",

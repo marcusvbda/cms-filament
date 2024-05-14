@@ -118,3 +118,17 @@ body {
         }
     }
 }
+
+.icons-section {
+    .svg {
+        height: 43px;
+        stroke: var(--bs-primary);
+    }
+
+    .icons-section--banner {
+        margin-top: 100px;
+        background-color: #f4f4f9;
+        border-radius: 50px;
+        padding: 80px min(10%, 150px) 50px;
+    }
+}
