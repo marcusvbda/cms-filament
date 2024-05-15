@@ -1,6 +1,6 @@
 @php
     use App\Helpers\BladeTranslator;
-    $currentLocale = str_replace('_', '-', app()->getLocale() ?? 'en');
+    $currentLocale = app()->getLocale() ?? 'en';
     $currentYear = date('Y');
 
     function getActiveClass($path)
@@ -10,7 +10,7 @@
 @endphp
 
 <!doctype html>
-<html lang={{ $currentLocale }}>
+<html lang={{ str_replace('_', '-', $currentLocale) }}>
 
 <head>
     <meta name="title" content="Gravity labs | @yield('title')">
@@ -28,8 +28,7 @@
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="/">
-                    <img loading="lazy" src="{{ data_get($attributes, 'logo.url') }}" width="163"
-                        alt="{{ data_get($attributes, 'logo.meta.alt') }}" />
+                    <img loading="lazy" src="{{ asset('/images/logo.png') }}" width="163" alt="logo" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

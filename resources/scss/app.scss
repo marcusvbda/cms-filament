@@ -135,4 +135,50 @@ body {
 }
 
 #cases-page {
+    .case-card-items {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        display: grid;
+        gap: 32px;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        .case-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            h4 {
+                margin-top: 20px;
+                text-align: left;
+            }
+            .case-card-content {
+                position: relative;
+                height: 350px;
+                background-color: #e9e8e5;
+                border-radius: 10px;
+                background-image: var(--case-image);
+                background-repeat: no-repeat;
+                background-size: auto 100%;
+                background-position: center;
+                cursor: pointer;
+                transition: 0.5s;
+
+                .overlay-eye {
+                    display: none;
+                    transition: 0.5s;
+                }
+
+                &:hover {
+                    background-size: auto 110%;
+                    .overlay-eye {
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        inset: 0;
+                        background-color: rgba(0, 0, 0, 0.319);
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
 }

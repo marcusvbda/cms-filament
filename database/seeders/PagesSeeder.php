@@ -29,15 +29,6 @@ class PagesSeeder extends Seeder
         ]);
 
         $page->pageAttributes()->create([
-            'key' => 'logo',
-            'type' => 'file',
-            'fileValue' => 'logo.png',
-            'metaValue' => [
-                'alt' => 'logo',
-            ]
-        ]);
-
-        $page->pageAttributes()->create([
             'key' => 'hero_title',
             'type' => 'text',
             'textValue' => 'enhance your website design with martex'
@@ -146,6 +137,33 @@ class PagesSeeder extends Seeder
             'slug' => 'cases',
             'type' => 'blade',
             'is_published' => true
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'header_title',
+            'type' => 'text',
+            'textValue' => 'great design that works!'
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'header_description',
+            'type' => 'text',
+            'textValue' => 'ligula risus auctor tempus magna feugiat lacinia.'
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'cases',
+            'type' => 'repeater',
+            'repeaterType' => 'file',
+            'repeaterValue' => array_map(function ($index) {
+                return [
+                    'fileValue' => "case-$index.jpeg",
+                    'metaValue' => [
+                        'title' => 'case ' . $index,
+                        'url' => '#'
+                    ]
+                ];
+            }, range(1, 3))
         ]);
     }
 }
