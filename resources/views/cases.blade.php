@@ -7,5 +7,7 @@
 @section('description', ucfirst(BladeTranslator::__(data_get($page, 'description'))))
 
 @section('content')
-    cases
+    <div id="cases-page">
+        cases
+    </div>
 @endsection
