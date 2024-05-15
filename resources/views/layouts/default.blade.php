@@ -1,6 +1,11 @@
 @php
-    use App\Helpers\BladeTranslator;
-    $currentLocale = app()->getLocale() ?? 'en';
+    use App\Models\Language;
+    $languages = Language::get();
+    $currentLocale = app()->getLocale();
+    if (!$currentLocale) {
+        $currentLocale = @$languages[0]->code ?? 'en';
+        session()->put('locale', $currentLocale);
+    }
     $currentYear = date('Y');
 
     function getActiveClass($path)
@@ -39,43 +44,39 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('/') }}"
-                                href="/">{{ ucfirst(BladeTranslator::__('home')) }}</a>
+                                href="/">{{ ucfirst(Language::__('home')) }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('cases') }}"
-                                href="/cases">{{ ucfirst(BladeTranslator::__('cases')) }}</a>
+                                href="/cases">{{ ucfirst(Language::__('cases')) }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('team') }}"
-                                href="/our-team">{{ ucfirst(BladeTranslator::__('our team')) }}</a>
+                                href="/our-team">{{ ucfirst(Language::__('our team')) }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('about') }}"
-                                href="/about-us">{{ ucfirst(BladeTranslator::__('about us')) }}</a>
+                                href="/about-us">{{ ucfirst(Language::__('about us')) }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('contact') }}"
-                                href="/contact">{{ ucfirst(BladeTranslator::__('contact')) }}</a>
+                                href="/contact">{{ ucfirst(Language::__('contact')) }}</a>
                         </li>
                     </ul>
                 </div>
                 <div class="d-flex align-center ms-5 gap-3 language-selector">
                     <ul class="navbar-nav ms-auto mb-lg-0">
-                        <li class="nav-item ">
-                            <a class="nav-link {{ $currentLocale == 'en' ? 'active' : '' }}" aria-current="page"
-                                href="{{ route('set-language', ['lang' => 'en']) }}">
-                                <img loading="lazy" src="{{ asset('images/flags/usa.png') }}" alt="EN" />
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ $currentLocale == 'pt_BR' ? 'active' : '' }}" aria-current="page"
-                                href="{{ route('set-language', ['lang' => 'pt_BR']) }}">
-                                <img loading="lazy" src="{{ asset('images/flags/brazil.png') }}" alt="BR" />
-                            </a>
-                        </li>
+                        @foreach ($languages as $language)
+                            <li class="nav-item">
+                                <a class="nav-link {{ $currentLocale == $language->code ? 'active' : '' }}"
+                                    href="{{ route('set-language', ['lang' => $language->code]) }}">
+                                    <img loading="lazy" src="{{ Storage::url($language->flag) }}"
+                                        alt="{{ $language->name }}" />
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
-
             </div>
         </nav>
     </header>
@@ -85,7 +86,7 @@
     <div class="container">
         <footer class="py-5">
             <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p>© {{ $currentYear }}. {{ ucfirst(BladeTranslator::__('all rights reserved')) }}.</p>
+                <p>© {{ $currentYear }}. {{ ucfirst(Language::__('all rights reserved')) }}.</p>
                 <ul class="list-unstyled d-flex">
                     <li class="ms-3">
                         <a class="link-dark twitter-x" href="{{ data_get($attributes, 'twitter_url') }}">

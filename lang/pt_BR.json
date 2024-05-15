@@ -35,5 +35,8 @@
     "yes": "sim",
     "no": "não",
     "infos": "informações",
-    "new this week": "novos esta semana"
+    "new this week": "novos esta semana",
+    "language": "idioma",
+    "code": "código",
+    "flag": "bandeira"
 }
