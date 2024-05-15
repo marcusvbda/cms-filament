@@ -155,24 +155,26 @@
 @endsection
 
 <script type="module">
-    const swiper = new Swiper("#hero-swiper", {
-        direction: 'horizontal',
-        spaceBetween: 6,
-        slidesPerView: 3,
-        loop: true,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
-        breakpoints: {
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 40,
+    document.addEventListener('DOMContentLoaded', () => {
+        new Swiper("#hero-swiper", {
+            direction: 'horizontal',
+            spaceBetween: 6,
+            slidesPerView: 3,
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
             },
-            1024: {
-                slidesPerView: 6,
-                spaceBetween: 50,
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 40,
+                },
+                1024: {
+                    slidesPerView: 6,
+                    spaceBetween: 50,
+                },
             },
-        },
+        });
     });
 </script>
