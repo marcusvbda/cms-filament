@@ -15,6 +15,7 @@ class PagesSeeder extends Seeder
         Page::truncate();
         PageAttribute::truncate();
         $this->createHome();
+        $this->createCases();
     }
 
     public function createHome(): void
@@ -134,6 +135,17 @@ class PagesSeeder extends Seeder
             'key' => 'linkedin_url',
             'type' => 'text',
             'textValue' => '#'
+        ]);
+    }
+
+    public function createCases(): void
+    {
+        $page = Page::create([
+            'title' => 'cases',
+            'description' => 'lorem ipsum',
+            'slug' => 'cases',
+            'type' => 'blade',
+            'is_published' => true
         ]);
     }
 }
