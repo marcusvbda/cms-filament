@@ -17,7 +17,13 @@
 </head>
 
 <body>
-    @yield('content')
+    <header>
+        @include('components.theme.navbar')
+    </header>
+    <main>
+        @yield('content')
+    </main>
+    @include('components.theme.footer')
 </body>
 
 </html>

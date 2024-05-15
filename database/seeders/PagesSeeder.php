@@ -117,5 +117,23 @@ class PagesSeeder extends Seeder
                 'alt' => 'banner description'
             ]
         ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'twitter_url',
+            'type' => 'text',
+            'textValue' => '#'
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'instagram_url',
+            'type' => 'text',
+            'textValue' => '#'
+        ]);
+
+        $page->pageAttributes()->create([
+            'key' => 'linkedin_url',
+            'type' => 'text',
+            'textValue' => '#'
+        ]);
     }
 }
