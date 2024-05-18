@@ -137,7 +137,6 @@ body {
 #cases-page {
     .case-card-items {
         margin-top: 100px;
-        margin-bottom: 100px;
         display: grid;
         gap: 32px;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -176,6 +175,78 @@ body {
                         inset: 0;
                         background-color: rgba(0, 0, 0, 0.319);
                         color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#testimonials-page {
+    max-width: 100%;
+    overflow-x: hidden;
+    #testimonial-items {
+        margin-top: 50px;
+        display: grid;
+        gap: 32px;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        .testimonials-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            -webkit-box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+            -moz-box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgb(247, 247, 247);
+
+            .quote-icon {
+                position: absolute;
+                z-index: 0;
+                color: gray;
+                opacity: 0.1;
+                top: 0;
+            }
+
+            .content {
+                font-size: 1rem;
+                color: #6c757d;
+                line-height: 1.6666;
+                font-weight: 400;
+                text-align: left;
+            }
+
+            .author {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+
+                .avatar {
+                    height: 64px;
+                    width: 64px;
+                    border: 1px solid rgb(247, 247, 247);
+                    border-radius: 100%;
+                    background-image: var(--avatar);
+                    background-size: cover;
+                }
+
+                .info {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: left;
+
+                    .name {
+                        font-size: 1rem;
+                        font-weight: 700;
+                    }
+
+                    .description {
+                        font-size: 0.8rem;
+                        color: #6c757d;
+                        line-height: 1.6666;
+                        font-weight: 400;
                     }
                 }
             }

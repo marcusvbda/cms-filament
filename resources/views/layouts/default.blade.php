@@ -58,10 +58,6 @@
                                 href="/cases">{{ ucfirst(Language::__('cases')) }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ getActiveClass('about') }}"
-                                href="/about-us">{{ ucfirst(Language::__('about us')) }}</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('contact') }}"
                                 href="/contact">{{ ucfirst(Language::__('contact')) }}</a>
                         </li>

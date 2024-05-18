@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 
 class PagesSeeder extends Seeder
 {
-    protected $componentHero, $exampleBanner, $descriptionBanner, $casesSection;
+    protected $componentHero, $exampleBanner, $descriptionBanner, $casesSection, $testimonialsSection;
 
     public function run(): void
     {
@@ -150,6 +150,38 @@ class PagesSeeder extends Seeder
                 ];
             }, range(1, 3))
         ]);
+
+        $this->testimonialsSection = Component::create([
+            'name' => 'Testimonials Section'
+        ]);
+
+        $this->testimonialsSection->_attributes()->create([
+            'key' => 'header_title',
+            'type' => 'text',
+            'textValue' => 'our Happy Customers'
+        ]);
+
+        $this->testimonialsSection->_attributes()->create([
+            'key' => 'header_description',
+            'type' => 'text',
+            'textValue' => 'ligula risus auctor tempus magna feugiat lacinia.'
+        ]);
+
+        $this->testimonialsSection->_attributes()->create([
+            'key' => 'testimonials',
+            'type' => 'repeater',
+            'repeaterType' => 'file',
+            'repeaterValue' => array_map(function ($index) {
+                return [
+                    'fileValue' => "author.jpg",
+                    'metaValue' => [
+                        'content' => 'Quaerat sodales sapien euismod blandit aliquet ipsum primis undo and cubilia laoreet augue and luctus magna dolor luctus egestas sapien vitae',
+                        'name' => 'John Doe',
+                        'description' => 'Company CEO'
+                    ]
+                ];
+            }, range(1, 5))
+        ]);
     }
 
     public function createHome(): void
@@ -180,11 +212,10 @@ class PagesSeeder extends Seeder
             'componentValue' => $this->descriptionBanner->id
         ]);
 
-
         $page->_attributes()->create([
-            'key' => 'cases_section',
+            'key' => 'testimonials_section',
             'type' => 'component',
-            'componentValue' => $this->casesSection->id
+            'componentValue' => $this->testimonialsSection->id
         ]);
     }
 
@@ -202,6 +233,12 @@ class PagesSeeder extends Seeder
             'key' => 'cases_section',
             'type' => 'component',
             'componentValue' => $this->casesSection->id
+        ]);
+
+        $page->_attributes()->create([
+            'key' => 'testimonials_section',
+            'type' => 'component',
+            'componentValue' => $this->testimonialsSection->id
         ]);
     }
 }

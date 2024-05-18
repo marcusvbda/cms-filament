@@ -11,5 +11,6 @@
         @include('fragments.hero')
         @include('fragments.descriptionBanner')
         @include('fragments.iconsSection')
+        @include('fragments.testimonials')
     </div>
 @endsection

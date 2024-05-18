@@ -8,4 +8,5 @@
 
 @section('content')
     @include('fragments.cases')
+    @include('fragments.testimonials')
 @endsection
