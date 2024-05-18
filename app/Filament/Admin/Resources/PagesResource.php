@@ -21,9 +21,6 @@ class PagesResource extends Resource
     protected static ?string $model = Page::class;
 
     protected static ?string $navigationIcon = 'ri-collage-fill';
-
-    protected static ?string $navigationGroup = 'Cms';
-
     protected static ?string $recordTitleAttribute = 'title';
 
     public static function getLabel(): ?string
@@ -102,7 +99,13 @@ class PagesResource extends Resource
                         $slug = str_replace(".", "/", $record->slug);
                         $url = $record->slug === "index" ? "/" : "/" . $slug;
                         return $url;
-                    }, true)
+                    }, true),
+                TextColumn::make('attributes')
+                    ->label(ucfirst(__("attributes")))
+                    ->state(function ($record) {
+                        $qty = $record->_attributes->count();
+                        return $qty . ' ' . __('attribute' . ($qty > 1 ? 's' : ''));
+                    })
             ])
             ->recordAction(null)
             ->filters([

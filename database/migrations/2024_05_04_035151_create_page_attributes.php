@@ -1,6 +1,5 @@
 <?php
 
-use Database\Seeders\PagesSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,22 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('page_attributes', function (Blueprint $table) {
+        Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('page_id')->constrained()->onDelete('cascade');
+            $table->morphs('entity');
             $table->string('key');
             $table->string('type');
+            $table->string('componentValue')->nullable();
             $table->longText('textValue')->nullable();
             $table->longText('fileValue')->nullable();
             $table->boolean('booleanValue')->nullable();
-            $table->text('metaValue')->nullable();
+            $table->longText('metaValue')->nullable();
             $table->text('repeaterType')->nullable();
             $table->jsonb('repeaterValue')->nullable();
             $table->timestamps();
         });
-
-
-        (new PagesSeeder())->run();
     }
 
     /**

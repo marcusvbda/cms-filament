@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Component;
 use App\Models\Page;
+use App\Models\Parameter;
 
 class PagesController extends Controller
 {
@@ -10,10 +12,18 @@ class PagesController extends Controller
     {
         $slug  = str_replace("/", ".", $slug);
         $page = Page::where('slug', $slug)->where("is_published", true)->firstOrFail();
-        $attributes = $page->getProcessedAttributes();
-        if ($page->type === 'api') return response()->json(['title' => $page->title, 'attributes' => $attributes]);
+        $pageAttributes = $page->getProcessedAttributes();
+        $siteParameters = Parameter::where('key', "like", "site_%")->get();
+        $siteAttributes = [];
+        foreach ($siteParameters as $parameter) {
+            $siteAttributes[$parameter->key] = $parameter->value;
+            if ($parameter->type === 'component') {
+                $siteAttributes[$parameter->key] = Component::find($parameter->value)->getProcessedAttributes();
+            }
+        }
+        if ($page->type === 'api') return response()->json(['title' => $page->title, 'pageAttributes' => $pageAttributes]);
         if (!view()->exists($page->slug)) abort(404);
-        return view($page->slug, compact('page', 'attributes'))->render();
+        return view($page->slug, compact('page', 'pageAttributes', 'siteAttributes'))->render();
     }
 
     public function setLanguage($lang)

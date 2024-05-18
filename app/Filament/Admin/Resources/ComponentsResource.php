@@ -2,10 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\LanguagesResource\Pages;
-use App\Models\Language;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Repeater;
+use App\Filament\Admin\Resources\ComponentsResource\Pages;
+use App\Filament\Admin\Resources\ComponentsResource\RelationManagers\AttributesRelationManager;
+use App\Models\Component;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -14,22 +13,19 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class LanguagesResource extends Resource
+class ComponentsResource extends Resource
 {
-    protected static ?string $model = Language::class;
+    protected static ?string $model = Component::class;
 
-    protected static ?string $navigationIcon = 'ik-language';
+    protected static ?string $navigationIcon = 'phosphor-hard-drives';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getLabel(): ?string
     {
-        return __('language');
+        return __('component');
     }
 
-    public static function getGloballySearchableAttributes(): array
-    {
-        return ['name', 'code'];
-    }
 
     public static function form(Form $form): Form
     {
@@ -40,25 +36,10 @@ class LanguagesResource extends Resource
                         ->required()
                         ->label(ucfirst(__('name')))
                         ->maxLength(255)
-                        ->columnSpan(1),
-                    TextInput::make('code')
-                        ->label(ucfirst(__('code')))
-                        ->columnSpan(1),
-                    FileUpload::make('flag')->required()->columnSpanFull()->label(ucfirst(__('flag')))->downloadable()->imageEditor(),
-                ])->columns(2),
-                Section::make([
-                    Repeater::make('items')
-                        ->reorderable(false)
-                        ->label(ucfirst(__('items')))
-                        ->schema([
-                            TextInput::make('key')->required()->distinct()->label(ucfirst(__('key'))),
-                            TextInput::make('value')->required()->label(ucfirst(__('value'))),
-                        ])
-                        ->columns(2)
-                ]),
+                        ->columnSpanFull(),
+                ])
             ]);
     }
-
 
     public static function table(Table $table): Table
     {
@@ -71,10 +52,12 @@ class LanguagesResource extends Resource
                     ->label(ucfirst(__("name")))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('code')
-                    ->label(ucfirst(__("code")))
-                    ->searchable()
-                    ->sortable(),
+                TextColumn::make('attributes')
+                    ->label(ucfirst(__("attributes")))
+                    ->state(function ($record) {
+                        $qty = $record->_attributes->count();
+                        return $qty . ' ' . __('attribute' . ($qty > 1 ? 's' : ''));
+                    })
             ])
             ->filters([
                 //
@@ -93,16 +76,16 @@ class LanguagesResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // 
+            AttributesRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPages::route('/'),
-            'create' => Pages\CreatePages::route('/create'),
-            'edit' => Pages\EditPages::route('/{record}/edit'),
+            'index' => Pages\ListComponents::route('/'),
+            'create' => Pages\CreateComponents::route('/create'),
+            'edit' => Pages\EditComponents::route('/{record}/edit'),
         ];
     }
 }

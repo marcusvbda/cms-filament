@@ -30,19 +30,7 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         $tableParamsExists = DB::select("SELECT * FROM information_schema.tables WHERE table_name = 'parameters'");
-        $prefix =  $tableParamsExists ? (@Parameter::find('admin_route')?->value ?? "admin") : "admin";
         $menuType = $tableParamsExists ? @Parameter::find('menu_type')?->value : "topbar";
-
-        // $tableCollectionsExists = DB::select("SELECT * FROM information_schema.tables WHERE table_name = 'collections'");
-
-        // $collections = array_map(function ($collection) use ($prefix) {
-        //     $name = strtolower(data_get($collection, "name"));
-        //     $slug = Str::slug($name);
-        //     return NavigationItem::make(ucfirst(__($name)))
-        //         ->url("/$prefix/data/tables/$slug")
-        //         ->icon('bx-data')
-        //         ->group(ucfirst(__("collections")));
-        // }, $tableCollectionsExists ? Collection::get()->toArray() : []);
 
         return $panel
             ->id('admin')
@@ -95,12 +83,12 @@ class AdminPanelProvider extends PanelProvider
                 MenuItem::make()
                     ->label(ucfirst(__('parameters')))
                     ->icon('feathericon-settings')
-                    ->url("/$prefix/parameters")
+                    ->url("/admin/parameters")
                     ->visible(fn (): bool => ParametersResource::canAccess()),
                 MenuItem::make()
                     ->label(ucfirst(__('users')))
                     ->icon('heroicon-o-user')
-                    ->url("/$prefix/users")
+                    ->url("/admin/users")
                     ->visible(fn (): bool => UserResource::canAccess()),
             ]);
         // ->navigationItems($collections);

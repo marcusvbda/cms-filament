@@ -2,65 +2,67 @@
 
 namespace Database\Seeders;
 
+use App\Models\Component;
 use App\Models\Page;
-use App\Models\PageAttribute;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class PagesSeeder extends Seeder
 {
+    protected $componentHero, $exampleBanner, $descriptionBanner, $casesSection;
+
     public function run(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Page::truncate();
-        PageAttribute::truncate();
+        $this->createComponents();
         $this->createHome();
         $this->createCases();
     }
 
-    public function createHome(): void
+    public function createComponents(): void
     {
-        $page = Page::create([
-            'title' => 'home',
-            'description' => 'lorem ipsum',
-            'slug' => 'index',
-            'type' => 'blade',
-            'is_published' => true
+        $this->componentHero = Component::create([
+            'name' => 'Section Hero'
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'hero_title',
-            'type' => 'text',
-            'textValue' => 'enhance your website design with martex'
-        ]);
-
-        $page->pageAttributes()->create([
-            'key' => 'hero_subtitle',
-            'type' => 'text',
-            'textValue' => 'mauris donec ociis diam magnis sapien sagittis sapien tempor volute gravida aliquet tortor undo aliquet an egestas in magna egestas sapien quaerat'
-        ]);
-
-        $page->pageAttributes()->create([
-            'key' => 'hero_input_placeholder',
-            'type' => 'text',
-            'textValue' => 'enter your email here'
-        ]);
-
-        $page->pageAttributes()->create([
-            'key' => 'hero_input_button',
-            'type' => 'text',
-            'textValue' => 'subscribe'
-        ]);
-
-        $page->pageAttributes()->create([
-            'key' => 'hero_background',
+        $this->componentHero->_attributes()->create([
+            'key' => 'background',
             'type' => 'file',
             'fileValue' => 'hero-bg.jpeg',
             'metaValue' => []
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'hero_swiper_brands',
+        $this->componentHero->_attributes()->create([
+            'key' => 'title',
+            'type' => 'text',
+            'textValue' => 'enhance your website design with martex'
+        ]);
+
+        $this->componentHero->_attributes()->create([
+            'key' => 'subtitle',
+            'type' => 'text',
+            'textValue' => 'mauris donec ociis diam magnis sapien sagittis sapien tempor volute gravida aliquet tortor undo aliquet an egestas in magna egestas sapien quaerat'
+        ]);
+
+        $this->componentHero->_attributes()->create([
+            'key' => 'input_placeholder',
+            'type' => 'text',
+            'textValue' => 'enter your email here'
+        ]);
+
+        $this->componentHero->_attributes()->create([
+            'key' => 'input_button',
+            'type' => 'text',
+            'textValue' => 'subscribe'
+        ]);
+
+        $this->componentHero->_attributes()->create([
+            'key' => 'background',
+            'type' => 'file',
+            'fileValue' => 'hero-bg.jpeg',
+            'metaValue' => []
+        ]);
+
+        $this->componentHero->_attributes()->create([
+            'key' => 'swiper_brands',
             'type' => 'repeater',
             'repeaterType' => 'file',
             'repeaterValue' => array_map(function ($index) {
@@ -73,8 +75,12 @@ class PagesSeeder extends Seeder
             }, range(1, 10))
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'description_banners',
+        $this->exampleBanner = Component::create([
+            'name' => 'Example Banner'
+        ]);
+
+        $this->exampleBanner->_attributes()->create([
+            'key' => 'banners',
             'type' => 'repeater',
             'repeaterType' => 'file',
             'repeaterValue' => array_map(function ($index) {
@@ -89,20 +95,24 @@ class PagesSeeder extends Seeder
             }, range(1, 3))
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'banner_description_title',
+        $this->descriptionBanner = Component::create([
+            'name' => 'Description Banner'
+        ]);
+
+        $this->descriptionBanner->_attributes()->create([
+            'key' => 'title',
             'type' => 'text',
             'textValue' => 'affordable solutions for all your creativity needs'
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'banner_description_subtitle',
+        $this->descriptionBanner->_attributes()->create([
+            'key' => 'subtitle',
             'type' => 'text',
             'textValue' => 'aliquam a augue suscipit luctus neque purus ipsum neque diam dolor primis libero tempus, blandit and cursus varius and magnis sodales'
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'banner_description_banner',
+        $this->descriptionBanner->_attributes()->create([
+            'key' => 'banner',
             'type' => 'file',
             'fileValue' => 'desc-banner-banner.png',
             'metaValue' => [
@@ -110,22 +120,71 @@ class PagesSeeder extends Seeder
             ]
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'twitter_url',
-            'type' => 'text',
-            'textValue' => '#'
+        $this->casesSection = Component::create([
+            'name' => 'Section Cases'
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'instagram_url',
+        $this->casesSection->_attributes()->create([
+            'key' => 'header_title',
             'type' => 'text',
-            'textValue' => '#'
+            'textValue' => 'great design that works!'
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'linkedin_url',
+        $this->casesSection->_attributes()->create([
+            'key' => 'header_description',
             'type' => 'text',
-            'textValue' => '#'
+            'textValue' => 'ligula risus auctor tempus magna feugiat lacinia.'
+        ]);
+
+        $this->casesSection->_attributes()->create([
+            'key' => 'cases',
+            'type' => 'repeater',
+            'repeaterType' => 'file',
+            'repeaterValue' => array_map(function ($index) {
+                return [
+                    'fileValue' => "case-$index.jpeg",
+                    'metaValue' => [
+                        'title' => 'case ' . $index,
+                        'url' => '#'
+                    ]
+                ];
+            }, range(1, 3))
+        ]);
+    }
+
+    public function createHome(): void
+    {
+        $page = Page::create([
+            'title' => 'home',
+            'description' => 'lorem ipsum',
+            'slug' => 'index',
+            'type' => 'blade',
+            'is_published' => true
+        ]);
+
+        $page->_attributes()->create([
+            'key' => 'section_hero',
+            'type' => 'component',
+            'componentValue' => $this->componentHero->id
+        ]);
+
+        $page->_attributes()->create([
+            'key' => 'example_banner',
+            'type' => 'component',
+            'componentValue' => $this->exampleBanner->id
+        ]);
+
+        $page->_attributes()->create([
+            'key' => 'description_banner',
+            'type' => 'component',
+            'componentValue' => $this->descriptionBanner->id
+        ]);
+
+
+        $page->_attributes()->create([
+            'key' => 'cases_section',
+            'type' => 'component',
+            'componentValue' => $this->casesSection->id
         ]);
     }
 
@@ -139,31 +198,10 @@ class PagesSeeder extends Seeder
             'is_published' => true
         ]);
 
-        $page->pageAttributes()->create([
-            'key' => 'header_title',
-            'type' => 'text',
-            'textValue' => 'great design that works!'
-        ]);
-
-        $page->pageAttributes()->create([
-            'key' => 'header_description',
-            'type' => 'text',
-            'textValue' => 'ligula risus auctor tempus magna feugiat lacinia.'
-        ]);
-
-        $page->pageAttributes()->create([
-            'key' => 'cases',
-            'type' => 'repeater',
-            'repeaterType' => 'file',
-            'repeaterValue' => array_map(function ($index) {
-                return [
-                    'fileValue' => "case-$index.jpeg",
-                    'metaValue' => [
-                        'title' => 'case ' . $index,
-                        'url' => '#'
-                    ]
-                ];
-            }, range(1, 3))
+        $page->_attributes()->create([
+            'key' => 'cases_section',
+            'type' => 'component',
+            'componentValue' => $this->casesSection->id
         ]);
     }
 }

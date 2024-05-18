@@ -23,6 +23,7 @@
     "password": "senha",
     "password_confirmation": "confirmação de senha",
     "page": "página",
+    "attribute": "atributo",
     "attributes": "atributos",
     "key": "chave",
     "type": "tipo",
@@ -42,5 +43,11 @@
     "flag": "bandeira",
     "page attribute": "atributo da página",
     "page attributes": "atributos da página",
-    "export": "exportar"
+    "export": "exportar",
+    "component": "componente",
+    "components": "componentes",
+    "component attribute": "atributo do componente",
+    "component attributes": "atributos do componente",
+    "default component in all pages": "componente padrão em todas páginas",
+    "site description": "descrição do site"
 }

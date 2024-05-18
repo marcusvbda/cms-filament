@@ -24,7 +24,6 @@ class CategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-
     public static function getLabel(): ?string
     {
         return __('category');

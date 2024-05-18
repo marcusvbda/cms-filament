@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PageAttribute extends Model
+class Attribute extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'page_id',
+        'entity_type',
+        'entity_id',
         'key',
+        'componentValue',
         'textValue',
         'fileValue',
         'type',
@@ -28,6 +30,6 @@ class PageAttribute extends Model
 
     public function page()
     {
-        return $this->belongsTo(Page::class);
+        return $this->morphTo();
     }
 }

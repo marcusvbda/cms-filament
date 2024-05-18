@@ -2,11 +2,14 @@
 
 namespace App\Filament\Admin\Resources\PagesResource\RelationManagers;
 
+use DB;
+use App\Models\Component;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ToggleButtons;
@@ -21,69 +24,81 @@ use Illuminate\Support\HtmlString;
 
 class PageAttributesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'pageAttributes';
+    protected static string $relationship = '_attributes';
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return ucfirst(__('page attributes'));
     }
 
+    public static function createForm($isComponent = false)
+    {
+        $types = [
+            'text' => ucfirst(__('text')),
+            'boolean' => ucfirst(__('boolean')),
+            'file' => ucfirst(__('file')),
+            'editor' => ucfirst(__('editor')),
+            'repeater' => ucfirst(__('repeater')),
+        ];
+        if (!$isComponent) {
+            $types['component'] = ucfirst(__('component'));
+        }
+        return  [
+            Section::make([
+                TextInput::make('key')->required()->distinct()->label(ucfirst(__('key')))
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn ($set, $state) => $set('key', Str::slug($state, '_'))),
+                ToggleButtons::make('type')
+                    ->label(ucfirst(__('type')))
+                    ->required()
+                    ->options($types)->default('text')->live()
+                    ->inline()->columnSpan(1),
+                Select::make('componentValue')->lazy()->required()
+                    ->label(ucfirst(__('component')))
+                    ->options(Component::query()->pluck('name', 'id'))->visible(fn ($get) => $get('type') === 'component')
+                    ->columnSpanFull(),
+                KeyValue::make('metaValue')->visible(fn ($get) => in_array($get('type'), ['file', 'image']))
+                    ->label(ucfirst(__('meta')))->columnSpanFull(),
+                Toggle::make('booleanValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                    ->visible(fn ($get) => $get('type') === 'boolean'),
+                TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                    ->visible(fn ($get) => $get('type') === 'text'),
+                FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                    ->visible(fn ($get) => $get('type') === 'file')->downloadable()->imageEditor(),
+                RichEditor::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                    ->visible(fn ($get) => $get('type') === 'editor'),
+                ToggleButtons::make('repeaterType')
+                    ->label(ucfirst(__('type')))
+                    ->required()
+                    ->options([
+                        'text' => ucfirst(__('text')),
+                        'file' => ucfirst(__('file')),
+                    ])->default('text')->live()
+                    ->inline()->visible(fn ($get) => $get('type') === 'repeater')
+                    ->columnSpan(1),
+                Repeater::make('repeaterValue')
+                    ->label(ucfirst(__('items')))
+                    ->schema([
+                        TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))->distinct()
+                    ])
+                    ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'text'))
+                    ->columnSpanFull(),
+                Repeater::make('repeaterValue')
+                    ->label(ucfirst(__('items')))
+                    ->schema([
+                        KeyValue::make('metaValue')->label(ucfirst(__('meta')))->columnSpanFull(),
+                        FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                            ->downloadable()->imageEditor()
+                    ])
+                    ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'file'))
+                    ->columnSpanFull()
+            ])
+        ];
+    }
+
     public function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Section::make([
-                    TextInput::make('key')->required()->distinct()->label(ucfirst(__('key')))
-                        ->live(onBlur: true)
-                        ->afterStateUpdated(fn ($set, $state) => $set('key', Str::slug($state, '_'))),
-                    ToggleButtons::make('type')
-                        ->label(ucfirst(__('type')))
-                        ->required()
-                        ->options([
-                            'text' => ucfirst(__('text')),
-                            'boolean' => ucfirst(__('boolean')),
-                            'file' => ucfirst(__('file')),
-                            'editor' => ucfirst(__('editor')),
-                            'repeater' => ucfirst(__('repeater')),
-                        ])->default('text')->live()
-                        ->inline()->columnSpan(1),
-                    KeyValue::make('metaValue')->visible(fn ($get) => in_array($get('type'), ['file', 'image']))
-                        ->label(ucfirst(__('meta')))->columnSpanFull(),
-                    Toggle::make('booleanValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                        ->visible(fn ($get) => $get('type') === 'boolean'),
-                    TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                        ->visible(fn ($get) => $get('type') === 'text'),
-                    FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                        ->visible(fn ($get) => $get('type') === 'file')->downloadable()->imageEditor(),
-                    RichEditor::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                        ->visible(fn ($get) => $get('type') === 'editor'),
-                    ToggleButtons::make('repeaterType')
-                        ->label(ucfirst(__('type')))
-                        ->required()
-                        ->options([
-                            'text' => ucfirst(__('text')),
-                            'file' => ucfirst(__('file')),
-                        ])->default('text')->live()
-                        ->inline()->visible(fn ($get) => $get('type') === 'repeater')
-                        ->columnSpan(1),
-                    Repeater::make('repeaterValue')
-                        ->label(ucfirst(__('items')))
-                        ->schema([
-                            TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))->distinct()
-                        ])
-                        ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'text'))
-                        ->columnSpanFull(),
-                    Repeater::make('repeaterValue')
-                        ->label(ucfirst(__('items')))
-                        ->schema([
-                            KeyValue::make('metaValue')->label(ucfirst(__('meta')))->columnSpanFull(),
-                            FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
-                                ->downloadable()->imageEditor()
-                        ])
-                        ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'file'))
-                        ->columnSpanFull()
-                ]),
-            ]);
+        return $form->schema(static::createForm());
     }
 
     private function getValueColumn($record, $imageSize = "200px")
@@ -93,6 +108,7 @@ class PageAttributesRelationManager extends RelationManager
         $value = data_get($record, $target);
         $truncatedValue = match ($type) {
             'boolean' => $value ? ucfirst(__('yes')) : ucfirst(__('no')),
+            'component' => Component::find($value)->editUrl,
             'file' => (function () use ($value, $imageSize) {
                 $isImage = Str::contains($value, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
                 $url = Storage::url($value);

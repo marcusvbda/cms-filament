@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Component;
 use App\Models\Parameter;
 use Illuminate\Database\Seeder;
 
@@ -10,13 +11,7 @@ class ParametersSeeder extends Seeder
     public function run(): void
     {
         Parameter::truncate();
-
-        Parameter::create([
-            'key' => 'admin_route',
-            'label' => 'admin route',
-            'value' => 'admin',
-            'type' => 'text'
-        ]);
+        Component::where('name', 'Default component')->delete();
 
         Parameter::create([
             'key' => 'app_name',
@@ -43,6 +38,49 @@ class ParametersSeeder extends Seeder
             'label' => 'primary color',
             'value' => '#EA580C',
             'type' => 'color'
+        ]);
+
+        Parameter::create([
+            'key' => 'site_title',
+            'label' => 'site name',
+            'value' => 'Gravity labs',
+            'type' => 'text',
+        ]);
+
+        Parameter::create([
+            'key' => 'site_description',
+            'label' => 'site description',
+            'value' => 'description of your site over here ....',
+            'type' => 'textarea',
+        ]);
+
+        $component = Component::create([
+            'name' => 'Default component'
+        ]);
+
+        $component->_attributes()->create([
+            'key' => 'twitter_url',
+            'type' => 'text',
+            'textValue' => '#'
+        ]);
+
+        $component->_attributes()->create([
+            'key' => 'instagram_url',
+            'type' => 'text',
+            'textValue' => '#'
+        ]);
+
+        $component->_attributes()->create([
+            'key' => 'linkedin_url',
+            'type' => 'text',
+            'textValue' => '#'
+        ]);
+
+        Parameter::create([
+            'key' => 'site_component_default',
+            'label' => "default component in all pages",
+            'value' => $component->id,
+            'type' => 'component',
         ]);
     }
 }

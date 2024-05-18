@@ -1,5 +1,7 @@
 <?php
 
+use Database\Seeders\PagesSeeder;
+use Database\Seeders\ParametersSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,15 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parameters', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->string('label');
-            $table->text('value')->nullable();
-            $table->json('attributes')->nullable();
-            $table->string('type');
-
+        Schema::create('components', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->timestamps();
         });
+
+        (new PagesSeeder())->run();
+        (new ParametersSeeder())->run();
     }
 
     /**
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('parameters');
+        Schema::dropIfExists('components');
     }
 };
