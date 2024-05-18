@@ -2,9 +2,10 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Admin\Resources\Blog\PostsResource\Widgets\QtyPosts;
-use App\Filament\Admin\Resources\Cms\PagesResource\Widgets\QtyPages;
-use App\Filament\Admin\Resources\Settings;
+use App\Filament\Admin\Resources\PostsResource\Widgets\QtyPosts;
+use App\Filament\Admin\Resources\PagesResource\Widgets\QtyPages;
+use App\Filament\Admin\Resources\ParametersResource;
+use App\Filament\Admin\Resources\UserResource;
 use App\Models\Parameter;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -94,13 +95,13 @@ class AdminPanelProvider extends PanelProvider
                 MenuItem::make()
                     ->label(ucfirst(__('parameters')))
                     ->icon('feathericon-settings')
-                    ->url("/$prefix/settings/parameters")
-                    ->visible(fn (): bool => Settings\ParametersResource::canAccess()),
+                    ->url("/$prefix/parameters")
+                    ->visible(fn (): bool => ParametersResource::canAccess()),
                 MenuItem::make()
                     ->label(ucfirst(__('users')))
                     ->icon('heroicon-o-user')
-                    ->url("/$prefix/settings/users")
-                    ->visible(fn (): bool => Settings\UserResource::canAccess()),
+                    ->url("/$prefix/users")
+                    ->visible(fn (): bool => UserResource::canAccess()),
             ]);
         // ->navigationItems($collections);
     }
