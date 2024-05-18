@@ -21,6 +21,11 @@ class LanguagesResource extends Resource
     protected static ?string $navigationIcon = 'ik-language';
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return ucfirst(__('content'));
+    }
+
     public static function getLabel(): ?string
     {
         return __('language');

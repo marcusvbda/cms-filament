@@ -16,7 +16,7 @@ class ParametersSeeder extends Seeder
         Parameter::create([
             'key' => 'app_name',
             'label' => 'application name',
-            'value' => 'ORANGE',
+            'value' => 'ORANGE.',
             'type' => 'text',
         ]);
 

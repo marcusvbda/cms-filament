@@ -21,11 +21,15 @@ class ComponentsResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return ucfirst(__('content'));
+    }
+
     public static function getLabel(): ?string
     {
         return __('component');
     }
-
 
     public static function form(Form $form): Form
     {

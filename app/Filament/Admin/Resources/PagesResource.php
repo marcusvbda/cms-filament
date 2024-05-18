@@ -23,6 +23,11 @@ class PagesResource extends Resource
     protected static ?string $navigationIcon = 'ri-collage-fill';
     protected static ?string $recordTitleAttribute = 'title';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return ucfirst(__('content'));
+    }
+
     public static function getLabel(): ?string
     {
         return __('page');

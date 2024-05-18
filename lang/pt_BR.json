@@ -49,5 +49,11 @@
     "component attribute": "atributo do componente",
     "component attributes": "atributos do componente",
     "default component in all pages": "componente padrão em todas páginas",
-    "site description": "descrição do site"
+    "site description": "descrição do site",
+    "auxiliary": "auxiliar",
+    "collection": "coleção",
+    "collections": "coleções",
+    "columns": "colunas",
+    "row": "registro",
+    "rows": "registros"
 }

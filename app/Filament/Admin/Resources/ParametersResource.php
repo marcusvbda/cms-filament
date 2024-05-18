@@ -22,6 +22,11 @@ class ParametersResource extends Resource
     protected static ?string $navigationIcon = 'feathericon-settings';
     protected static ?string $recordTitleAttribute = 'label';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return ucfirst(__('settings'));
+    }
+
     public static function getLabel(): ?string
     {
         return __('parameters');

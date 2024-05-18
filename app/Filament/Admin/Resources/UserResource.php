@@ -19,6 +19,11 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user';
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return ucfirst(__('access'));
+    }
+
     public static function getLabel(): ?string
     {
         return __('user');

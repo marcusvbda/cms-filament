@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/set-language/{lang}', [PagesController::class, 'setLanguage'])->name('set-language');
+Route::get('/webhook/{slug}', [PagesController::class, 'webhook'])->name('webhook');
 Route::get('/{slug}', [PagesController::class, 'show'])->where('slug', '.*');
