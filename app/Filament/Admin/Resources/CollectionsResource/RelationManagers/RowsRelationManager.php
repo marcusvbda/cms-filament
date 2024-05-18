@@ -59,6 +59,8 @@ class RowsRelationManager extends RelationManager
             };
         }
 
+        $columns[] = TextColumn::make('source')->label(ucfirst(__('source')));
+
         return $table
             ->recordTitleAttribute('name')
             ->columns($columns)

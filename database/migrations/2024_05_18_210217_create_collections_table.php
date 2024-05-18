@@ -22,6 +22,7 @@ return new class extends Migration
         Schema::create('collection_rows', function (Blueprint $table) {
             $table->id();
             $table->foreignId('collection_id')->constrained()->onDelete('cascade');
+            $table->string('source')->default("interface");
             $table->jsonb('data')->nullable();
             $table->timestamps();
         });

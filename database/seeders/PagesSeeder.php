@@ -15,6 +15,7 @@ class PagesSeeder extends Seeder
         $this->createComponents();
         $this->createHome();
         $this->createCases();
+        $this->createContacts();
     }
 
     public function createComponents(): void
@@ -239,6 +240,17 @@ class PagesSeeder extends Seeder
             'key' => 'testimonials_section',
             'type' => 'component',
             'componentValue' => $this->testimonialsSection->id
+        ]);
+    }
+
+    private function createContacts()
+    {
+        $page = Page::create([
+            'title' => 'contact',
+            'description' => 'lorem ipsum',
+            'slug' => 'contact',
+            'type' => 'blade',
+            'is_published' => true
         ]);
     }
 }

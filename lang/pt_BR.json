@@ -55,5 +55,7 @@
     "collections": "coleções",
     "columns": "colunas",
     "row": "registro",
-    "rows": "registros"
+    "rows": "registros",
+    "new entry to collection": "novo registro na coleção",
+    "source": "origem"
 }

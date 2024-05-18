@@ -11,6 +11,7 @@ class CollectionRow extends Model
 
     protected $fillable = [
         'data',
+        'source',
         'collection_id'
     ];
 

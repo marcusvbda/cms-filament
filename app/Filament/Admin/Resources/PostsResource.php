@@ -2,7 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\PostResource\Pages;
+use App\Filament\Admin\Resources\PostsResource\Pages;
 use App\Models\Category;
 use App\Models\Post;
 use Filament\Forms\Components\{Section, TextInput, Toggle, RichEditor, Select};
@@ -15,7 +15,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Str;
 
-class PostResource extends Resource
+class PostsResource extends Resource
 {
     protected static ?string $model = Post::class;
 

@@ -2,8 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Admin\Resources\PostsResource\Widgets\QtyPosts;
 use App\Filament\Admin\Resources\PagesResource\Widgets\QtyPages;
+use App\Filament\Admin\Resources\PostsResource\Widgets\QtyPosts;
 use App\Models\Parameter;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
