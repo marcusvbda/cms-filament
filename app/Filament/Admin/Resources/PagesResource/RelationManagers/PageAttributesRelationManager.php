@@ -141,7 +141,7 @@ class PageAttributesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('key')
             ->columns([
-                Tables\Columns\TextColumn::make('key')->label(ucfirst(__('key')) . " / " . ucfirst(__('key')))
+                Tables\Columns\TextColumn::make('key')->label(ucfirst(__('key')) . " / " . ucfirst(__('type')))
                     ->description(fn ($record): string => ucfirst(__($record->type)))->sortable()->searchable(isIndividual: true, isGlobal: false),
                 Tables\Columns\TextColumn::make('value')->label(ucfirst(__('value')))
                     ->state(fn ($record) => $this->getValueColumn($record))->html()
