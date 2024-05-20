@@ -185,12 +185,20 @@ body {
 #testimonials-page {
     max-width: 100%;
     overflow-x: hidden;
+
+    .card-banner {
+        background-color: #f4f4f9;
+        border-radius: 50px;
+        padding: 80px min(10%, 150px) 150px;
+    }
+
     #testimonial-items {
         margin-top: 50px;
         display: grid;
         gap: 32px;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         .testimonials-card {
+            background-color: white;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -251,5 +259,31 @@ body {
                 }
             }
         }
+    }
+}
+
+#contact-section {
+    label {
+        color: #353f4f;
+        line-height: 1;
+        font-weight: 500;
+    }
+
+    .text-muted {
+        font-weight: 200;
+        margin-bottom: 10px;
+    }
+
+    select,
+    input {
+        height: 50px;
+    }
+
+    .form-control {
+        background-color: #f5f6f8;
+        border: none;
+        color: gray;
+        font-weight: 200;
+        font-size: 14px;
     }
 }

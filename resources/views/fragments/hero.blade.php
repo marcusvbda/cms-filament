@@ -10,7 +10,7 @@
                         {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_hero.title'))) }}</h1>
                     <p class="fs-5 text-muted pb-5">
                         {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_hero.subtitle'))) }}</p>
-                    <div class="form-group input-group my-5 pb-4">
+                    <form method="POST" class="form-group input-group my-5 pb-4">
                         <input class="input-email form-control me-3" type="email"
                             placeholder="{{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_hero.input_placeholder'))) }}"
                             required="required">
@@ -18,7 +18,7 @@
                             <button class="btn btn-primary btn-lg"
                                 type="button">{{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_hero.input_button'))) }}</button>
                         </span>
-                    </div>
+                    </form>
                     <div class="swiper mt-4" id="hero-swiper">
                         <div class="swiper-wrapper">
                             @foreach (data_get($pageAttributes, 'section_hero.swiper_brands', []) as $slide)

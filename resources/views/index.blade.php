@@ -8,9 +8,17 @@
 
 @section('content')
     <div id="home-page">
-        @include('fragments.hero')
-        @include('fragments.descriptionBanner')
-        @include('fragments.iconsSection')
-        @include('fragments.testimonials')
+        <section id="home">
+            @include('fragments.hero')
+            @include('fragments.descriptionBanner')
+            @include('fragments.iconsSection')
+        </section>
+        <section id="cases">
+            @include('fragments.cases')
+            @include('fragments.testimonials')
+        </section>
+        <section id="contact">
+            @include('fragments.contact')
+        </section>
     </div>
 @endsection

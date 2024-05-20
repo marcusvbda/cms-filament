@@ -8,14 +8,12 @@ use Illuminate\Database\Seeder;
 
 class PagesSeeder extends Seeder
 {
-    protected $componentHero, $exampleBanner, $descriptionBanner, $casesSection, $testimonialsSection;
+    protected $componentHero, $exampleBanner, $descriptionBanner, $casesSection, $testimonialsSection, $contactSection;
 
     public function run(): void
     {
         $this->createComponents();
         $this->createHome();
-        $this->createCases();
-        $this->createContacts();
     }
 
     public function createComponents(): void
@@ -183,6 +181,83 @@ class PagesSeeder extends Seeder
                 ];
             }, range(1, 5))
         ]);
+
+        $this->contactSection = Component::create([
+            'name' => 'Section Contact'
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'form_url',
+            'type' => 'text',
+            'textValue' => "html://example.com"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'title',
+            'type' => 'text',
+            'textValue' => "questions? Let's Talk"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'description',
+            'type' => 'text',
+            'textValue' => "want to learn more about Martex, get a quote, or speak with an expert? Let us know what you
+            are looking for and we’ll get back to you right away"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'description',
+            'type' => 'text',
+            'textValue' => "want to learn more about Martex, get a quote, or speak with an expert? Let us know what you
+            are looking for and we’ll get back to you right away"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'q1_text',
+            'type' => 'text',
+            'textValue' => "this question is about"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'q1_desc',
+            'type' => 'text',
+            'textValue' => "choose a topic, so we know who to send your request to"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'q1_options',
+            'type' => 'repeater',
+            'repeaterType' => 'text',
+            'repeaterValue' => array_map(function ($index) {
+                return [
+                    'textValue' => "option $index",
+                ];
+            }, range(1, 10))
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'q2_text',
+            'type' => 'text',
+            'textValue' => "Your Name"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'q2_desc',
+            'type' => 'text',
+            'textValue' => "Please enter your real name"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'q3_text',
+            'type' => 'text',
+            'textValue' => "Explain your question in details"
+        ]);
+
+        $this->contactSection->_attributes()->create([
+            'key' => 'q3_desc',
+            'type' => 'text',
+            'textValue' => "Your OS version, Martex version & build, steps you did. Be VERY precise!"
+        ]);
     }
 
     public function createHome(): void
@@ -218,17 +293,6 @@ class PagesSeeder extends Seeder
             'type' => 'component',
             'componentValue' => $this->testimonialsSection->id
         ]);
-    }
-
-    public function createCases(): void
-    {
-        $page = Page::create([
-            'title' => 'cases',
-            'description' => 'lorem ipsum',
-            'slug' => 'cases',
-            'type' => 'blade',
-            'is_published' => true
-        ]);
 
         $page->_attributes()->create([
             'key' => 'cases_section',
@@ -241,16 +305,11 @@ class PagesSeeder extends Seeder
             'type' => 'component',
             'componentValue' => $this->testimonialsSection->id
         ]);
-    }
 
-    private function createContacts()
-    {
-        $page = Page::create([
-            'title' => 'contact',
-            'description' => 'lorem ipsum',
-            'slug' => 'contact',
-            'type' => 'blade',
-            'is_published' => true
+        $page->_attributes()->create([
+            'key' => 'section_contact',
+            'type' => 'component',
+            'componentValue' => $this->contactSection->id
         ]);
     }
 }

@@ -51,15 +51,15 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('/') }}"
-                                href="/">{{ ucfirst(Language::__('home')) }}</a>
+                                href="#">{{ ucfirst(Language::__('home')) }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('cases') }}"
-                                href="/cases">{{ ucfirst(Language::__('cases')) }}</a>
+                                href="#cases">{{ ucfirst(Language::__('cases')) }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ getActiveClass('contact') }}"
-                                href="/contact">{{ ucfirst(Language::__('contact')) }}</a>
+                                href="#contact">{{ ucfirst(Language::__('contact')) }}</a>
                         </li>
                     </ul>
                 </div>

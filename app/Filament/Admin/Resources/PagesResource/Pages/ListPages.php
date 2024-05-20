@@ -6,8 +6,8 @@ use App\Filament\Admin\Resources\PagesResource;
 use App\Filament\Admin\Resources\PagesResource\Widgets\QtyPages;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
+// use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
+// use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ListPages extends ListRecords
 {
@@ -24,10 +24,10 @@ class ListPages extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-            ExportAction::make()->exports([
-                ExcelExport::make()->fromTable()
-                // ->withFilename(fn () => uniqid() . '-pages')->queue()->withChunkSize(100)
-            ])->label(ucfirst(__('export')))
+            // ExportAction::make()->exports([
+            //     ExcelExport::make()->fromTable()
+            //     // ->withFilename(fn () => uniqid() . '-pages')->queue()->withChunkSize(100)
+            // ])->label(ucfirst(__('export')))
         ];
     }
 }

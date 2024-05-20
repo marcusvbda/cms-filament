@@ -4,8 +4,8 @@
 <section id="testimonials-page">
     <section class="header">
         <div class="p-3 p-md-5">
-            <div class="container-fluid py-5">
-                <div class="row d-flex align-items-center justify-content-center">
+            <div class="container-fluid">
+                <div class="row d-flex align-items-center justify-content-center card-banner">
                     <div class="col-12 col-md-10 text-center">
                         <h1 class="display-3 fw-bold mb-4 text-center" data-aos="fade-left">
                             {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'testimonials_section.header_title'))) }}
