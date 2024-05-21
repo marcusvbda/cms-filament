@@ -9,6 +9,7 @@
 @section('content')
     <div id="home-page">
         <section id="home">
+            <h1>Teste</h1>
             @include('fragments.hero')
             @include('fragments.descriptionBanner')
             @include('fragments.iconsSection')
