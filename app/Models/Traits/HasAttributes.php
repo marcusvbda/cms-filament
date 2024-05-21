@@ -10,8 +10,7 @@ trait HasAttributes
 {
     public function getProcessedAttributes()
     {
-        $appUrl = config("app.url");
-        return (object)collect($this->_attributes)->map(function ($row) use ($appUrl) {
+        return (object)collect($this->_attributes)->map(function ($row) {
             $type = match ($row->type) {
                 'text', 'editor' => 'text',
                 default => $row->type,
@@ -22,16 +21,16 @@ trait HasAttributes
 
             if (in_array($type, ['file', 'image'])) {
                 $value = (object) [
-                    'url' => $appUrl . Storage::url($value),
+                    'url' =>  Storage::url($value),
                     'meta' => (object)$row->metaValue,
                 ];
             }
 
             if ($type === 'repeater') {
-                $value = collect($row->repeaterValue)->map(function ($repeater) use ($row, $appUrl) {
+                $value = collect($row->repeaterValue)->map(function ($repeater) use ($row) {
                     if (in_array($row->repeaterType, ['file', 'image'])) {
                         return (object) [
-                            'url' => $appUrl . Storage::url($repeater[$row->repeaterType . "Value"]),
+                            'url' =>  Storage::url($repeater[$row->repeaterType . "Value"]),
                             'meta' => (object)$repeater["metaValue"],
                         ];
                     }

@@ -66,7 +66,7 @@ class PageAttributesRelationManager extends RelationManager
                     ->visible(fn ($get) => $get('type') === 'boolean'),
                 TextInput::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
                     ->visible(fn ($get) => $get('type') === 'text'),
-                FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                FileUpload::make('fileValue')->required()->moveFiles()->columnSpanFull()->label(ucfirst(__('value')))
                     ->visible(fn ($get) => $get('type') === 'file')->downloadable()->imageEditor(),
                 RichEditor::make('textValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
                     ->visible(fn ($get) => $get('type') === 'editor'),
@@ -91,7 +91,7 @@ class PageAttributesRelationManager extends RelationManager
                     ->label(ucfirst(__('items')))
                     ->schema([
                         KeyValue::make('metaValue')->label(ucfirst(__('meta')))->columnSpanFull(),
-                        FileUpload::make('fileValue')->required()->columnSpanFull()->label(ucfirst(__('value')))
+                        FileUpload::make('fileValue')->moveFiles()->required()->columnSpanFull()->label(ucfirst(__('value')))
                             ->downloadable()->imageEditor()
                     ])
                     ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'file'))

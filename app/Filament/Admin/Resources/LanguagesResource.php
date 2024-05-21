@@ -49,7 +49,7 @@ class LanguagesResource extends Resource
                     TextInput::make('code')
                         ->label(ucfirst(__('code')))
                         ->columnSpan(1),
-                    FileUpload::make('flag')->required()->columnSpanFull()->label(ucfirst(__('flag')))->downloadable()->imageEditor(),
+                    FileUpload::make('flag')->moveFiles()->required()->columnSpanFull()->label(ucfirst(__('flag')))->downloadable()->imageEditor(),
                 ])->columns(2),
                 Section::make([
                     Repeater::make('items')
