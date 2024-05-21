@@ -34,4 +34,5 @@ jobs:
             sudo docker exec Filament-CMS_APPLICATION php artisan optimize
             sudo docker exec Filament-CMS_APPLICATION php artisan icons:cache
             sudo docker exec Filament-CMS_APPLICATION php artisan up
+            # 
           EOF
