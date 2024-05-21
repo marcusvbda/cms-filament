@@ -39,6 +39,7 @@ composer require laravel/sail --dev --ignore-platform-reqs
 sudo apt install docker-compose
 ./vendor/bin/sail up -d
 docker ps -a
+composer install --ignore-platform-reqs
 docker exec -it  Filament-CMS_APPLICATION bash
 git config --global --add safe.directory '*'
 composer install

@@ -25,7 +25,11 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        $tableParamsExists = DB::select("SELECT * FROM information_schema.tables WHERE table_name = 'parameters'");
+        try {
+            $tableParamsExists = DB::select("SELECT * FROM information_schema.tables WHERE table_name = 'parameters'");
+        } catch (\Exception $e) {
+            $tableParamsExists = false;
+        }
         $menuType = $tableParamsExists ? @Parameter::find('menu_type')?->value : "topbar";
 
         return $panel
