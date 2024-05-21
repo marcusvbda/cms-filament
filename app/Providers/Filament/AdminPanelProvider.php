@@ -25,6 +25,16 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        if (!DB::connection()->getDatabaseName()) {
+            return $panel
+                ->id('admin')
+                ->default();
+        }
+
+        return $panel
+            ->id('admin')
+            ->default();
+
         try {
             $tableParamsExists = DB::select("SELECT * FROM information_schema.tables WHERE table_name = 'parameters'");
         } catch (\Exception $e) {
