@@ -1,75 +1,4 @@
-sudo ssh -i "gravity-labs.pem" ubuntu@ec2-3-17-162-100.us-east-2.compute.amazonaws.com
-
-//prepara server
-sudo apt update
-sudo apt install git && sudo apt install nginx && sudo apt install mysql-server && sudo apt install curl
-
-// instala php e packs
-sudo add-apt-repository ppa:ondrej/php
-sudo apt update
-sudo apt upgrade
-sudo apt install php8.2-dev
-sudo apt install php8.2-intl php8.2-ctype php8.2-curl php8.2-dom php8.2-fileinfo php8.2-mbstring php8.2-opcache php8.2-pdo php8.2-tokenizer php8.2-xml php8.2-zip php8.2-fpm php8.2-mysql
-sudo apt install unzip p7zip
-
-//node
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
-source ~/.bashrc  
-nvm install node
-
-
-//mysql
-sudo systemctl enable mysql
-sudo systemctl enable nginx
-sudo systemctl enable php8.2-fpm
-
-sudo systemctl status mysql
-sudo systemctl status nginx
-sudo systemctl status php8.2-fpm
-
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by '123456789';
-sudo mysql_secure_installation
-sudo mysql -u root -p
-create database gravitylabs;
-
-// composer 
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-
-sudo mv composer.phar /usr/local/bin/composer
-composer --version
-
-sudo chmod  o+w /var/www
-cd /var/www/
-git clone git@github.com:marcusvbda/cms-filament.git
-cd cms-filament/
-cp .env.example .env
-nano .env
-
-composer install --optimize-autoloader --no-dev
-sudo chmod -R 777 storage
-sudo chmod -R 777 bootstrap
-php artisan migrate
-php artisan key:generate
-
-npm install
-npm run build
-
-
-
-____
-sudo yum -y docker
-
-
-composer require laravel/sail --dev --ignore-platform-reqs
-
-
-
-
-_____
-ssh -i "gravity-labs.pem" ubuntu@ec2-3-145-89-126.us-east-2.compute.amazonaws.com
+sudo ssh -i "gravity-labs.pem" ubuntu@ec2-3-145-89-126.us-east-2.compute.amazonaws.com
 
 //install git
 sudo apt update
@@ -85,7 +14,8 @@ nano .env
 
 //install docker
 sudo apt-get update
-sudo apt-get install docker.io -y
+sudo apt install docker.io docker-compose-v2
+sudo usermod -aG docker ${USER}
 sudo systemctl start docker
 sudo systemctl enable docker
 
@@ -108,3 +38,10 @@ composer --version
 composer require laravel/sail --dev --ignore-platform-reqs
 sudo apt install docker-compose
 ./vendor/bin/sail up -d
+docker ps -a
+docker exec -it {container} bash
+git config --global --add safe.directory '*'
+composer install
+yarn install
+php artisan migrate
+yarn run build
