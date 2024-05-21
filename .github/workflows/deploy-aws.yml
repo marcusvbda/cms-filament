@@ -30,5 +30,4 @@ jobs:
             sudo docker exec Filament-CMS_APPLICATION php artisan route:cache && 
             sudo docker exec Filament-CMS_APPLICATION composer dump-autoload -o &&
             sudo docker exec Filament-CMS_APPLICATION php artisan optimize &&
-            sudo docker exec Filament-CMS_APPLICATION php artisan icons:cache &&
-            sudo docker exec Filament-CMS_APPLICATION php artisan icons:cache &&'
+            sudo docker exec Filament-CMS_APPLICATION php artisan icons:cache'
