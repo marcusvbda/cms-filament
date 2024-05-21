@@ -25,4 +25,10 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-218-29-206.us-east-2.compute.amazonaws.com 'cd cms-filament && git pull origin master && 
             sudo docker exec Filament-CMS_APPLICATION npm run build &&
-            sudo docker exec Filament-CMS_APPLICATION php artisan migrate'
+            sudo docker exec Filament-CMS_APPLICATION php artisan migrate &&
+            sudo docker exec Filament-CMS_APPLICATION php artisan config:cache &&
+            sudo docker exec Filament-CMS_APPLICATION php artisan route:cache && 
+            sudo docker exec Filament-CMS_APPLICATION composer dump-autoload -o &&
+            sudo docker exec Filament-CMS_APPLICATION php artisan optimize &&
+            sudo docker exec Filament-CMS_APPLICATION php artisan icons:cache &&
+            sudo docker exec Filament-CMS_APPLICATION php artisan icons:cache &&'
