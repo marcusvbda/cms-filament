@@ -44,3 +44,4 @@ composer dump-autoload -o
 php artisan optimize
 php artisan icons:cache
 php artisan make:filament-user
+php artisan storage:link
