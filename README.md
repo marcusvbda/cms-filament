@@ -7,7 +7,7 @@ Create a .env file according to the .env.example
 
 ## 3 - Build the container images
 ```
-$ ./vendor/bin/sail up -d
+$ docker-compose up -d --force-recreate
 ```
 
 ## 4 - Start aplication

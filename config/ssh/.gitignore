@@ -1,0 +1,3 @@
+*
+!.gitignore
+#coloque nesta pasta suas chaves ssh para uso dentro do container
