@@ -59,6 +59,12 @@ class ParametersSeeder extends Seeder
         ]);
 
         $component->_attributes()->create([
+            'key' => 'logo',
+            'type' => 'file',
+            'fileValue' => 'logo.png'
+        ]);
+
+        $component->_attributes()->create([
             'key' => 'twitter_url',
             'type' => 'text',
             'textValue' => '#'
