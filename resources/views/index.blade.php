@@ -7,9 +7,9 @@
 @section('description', ucfirst(BladeTranslator::__(data_get($page, 'description'))))
 
 @section('content')
-    <h1>teste</h1>
     <div id="home-page">
         <section id="home">
+            <h1>teste</h1>
             @include('fragments.hero')
             @include('fragments.descriptionBanner')
             @include('fragments.iconsSection')
