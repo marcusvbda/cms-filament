@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 
 class PagesSeeder extends Seeder
 {
-    protected $componentHero, $exampleBanner, $descriptionBanner, $casesSection, $testimonialsSection, $contactSection;
+    protected $componentHero, $exampleBanner, $descriptionBanner, $iconSetion, $casesSection, $testimonialsSection, $contactSection;
 
     public function run(): void
     {
@@ -116,6 +116,70 @@ class PagesSeeder extends Seeder
             'fileValue' => 'desc-banner-banner.png',
             'metaValue' => [
                 'alt' => 'banner description'
+            ]
+        ]);
+
+        $this->iconSetion = Component::create([
+            'name' => 'Icon Section'
+        ]);
+
+        $this->iconSetion->_attributes()->create([
+            'key' => 'title',
+            'type' => 'text',
+            'textValue' => 'unlock Your Creativity'
+        ]);
+
+        $this->iconSetion->_attributes()->create([
+            'key' => 'subtitle',
+            'type' => 'text',
+            'textValue' => 'ligula risus auctor tempus magna feugiat lacinia.'
+        ]);
+
+        $this->iconSetion->_attributes()->create([
+            'key' => 'infos',
+            'type' => 'repeater',
+            'repeaterType' => 'key',
+            'repeaterValue' => array_map(function ($index) {
+                return [
+                    'keyValue' => [
+                        'icon' => 'heroicon-s-star',
+                        'title' => 'lorem ipsum',
+                        'content' => 'Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum'
+                    ]
+                ];
+            }, range(1, 6))
+        ]);
+
+        $this->iconSetion->_attributes()->create([
+            'key' => 'title_2',
+            'type' => 'text',
+            'textValue' => 'scale your unique design process'
+        ]);
+
+        $this->iconSetion->_attributes()->create([
+            'key' => 'subtitle_2',
+            'type' => 'text',
+            'textValue' => 'sodales tempor sapien quaerat congue eget ipsum laoreet turpis neque auctor vitae eros dolor luctus placerat magna ligula cursus and purus pretium'
+        ]);
+
+        $this->iconSetion->_attributes()->create([
+            'key' => 'title_3',
+            'type' => 'text',
+            'textValue' => 'scale your unique design process'
+        ]);
+
+        $this->iconSetion->_attributes()->create([
+            'key' => 'subtitle_3',
+            'type' => 'text',
+            'textValue' => 'sodales tempor sapien quaerat congue eget ipsum laoreet turpis neque auctor vitae eros dolor luctus placerat magna ligula cursus and purus pretium'
+        ]);
+
+        $this->iconSetion->_attributes()->create([
+            'key' => 'image_3',
+            'type' => 'file',
+            'fileValue' => 'img-10.png',
+            'metaValue' => [
+                "alt" => "icon banner"
             ]
         ]);
 
@@ -286,6 +350,12 @@ class PagesSeeder extends Seeder
             'key' => 'description_banner',
             'type' => 'component',
             'componentValue' => $this->descriptionBanner->id
+        ]);
+
+        $page->_attributes()->create([
+            'key' => 'icon_section',
+            'type' => 'component',
+            'componentValue' => $this->iconSetion->id
         ]);
 
         $page->_attributes()->create([

@@ -39,6 +39,7 @@ class PageAttributesRelationManager extends RelationManager
             'file' => ucfirst(__('file')),
             'editor' => ucfirst(__('editor')),
             'repeater' => ucfirst(__('repeater')),
+            'key' => ucfirst(__('key : value')),
         ];
         if (!$isComponent) {
             $types['component'] = ucfirst(__('component'));
@@ -53,6 +54,8 @@ class PageAttributesRelationManager extends RelationManager
                     ->required()
                     ->options($types)->default('text')->live()
                     ->inline()->columnSpan(1),
+                KeyValue::make('keyValue')->required()->label(ucfirst(__('item')))->columnSpanFull()
+                    ->visible(fn ($get) => $get('type') === 'key'),
                 Select::make('componentValue')->lazy()->required()
                     ->label(ucfirst(__('component')))
                     ->options(Component::query()->pluck('name', 'id'))->visible(fn ($get) => $get('type') === 'component')
@@ -73,6 +76,7 @@ class PageAttributesRelationManager extends RelationManager
                     ->options([
                         'text' => ucfirst(__('text')),
                         'file' => ucfirst(__('file')),
+                        'key' => ucfirst(__('key : value')),
                     ])->default('text')->live()
                     ->inline()->visible(fn ($get) => $get('type') === 'repeater')
                     ->columnSpan(1),
@@ -91,6 +95,13 @@ class PageAttributesRelationManager extends RelationManager
                             ->downloadable()->imageEditor()
                     ])
                     ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'file'))
+                    ->columnSpanFull(),
+                Repeater::make('repeaterValue')
+                    ->label(ucfirst(__('items')))
+                    ->schema([
+                        KeyValue::make('keyValue')->required()->label(ucfirst(__('item'))),
+                    ])
+                    ->visible(fn ($get) => ($get('type') === 'repeater' && $get('repeaterType') === 'key'))
                     ->columnSpanFull()
             ])
         ];
@@ -130,6 +141,7 @@ class PageAttributesRelationManager extends RelationManager
                     </div>
                 HTML;
             })(),
+            'key' => json_encode($value, JSON_PRETTY_PRINT),
             default => Str::limit($value, 80),
         };
         $html = new HtmlString("<span>$truncatedValue</span>");

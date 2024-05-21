@@ -57,5 +57,6 @@
     "row": "registro",
     "rows": "registros",
     "new entry to collection": "novo registro na coleção",
-    "source": "origem"
+    "source": "origem",
+    "key : value": "chave : valor"
 }

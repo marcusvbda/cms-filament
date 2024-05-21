@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('key');
             $table->string('type');
             $table->string('componentValue')->nullable();
+            $table->longText('keyValue')->nullable();
             $table->longText('textValue')->nullable();
             $table->longText('fileValue')->nullable();
             $table->boolean('booleanValue')->nullable();

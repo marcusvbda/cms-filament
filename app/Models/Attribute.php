@@ -18,6 +18,7 @@ class Attribute extends Model
         'type',
         'booleanValue',
         'repeaterValue',
+        'keyValue',
         'repeaterType',
         'metaValue'
     ];
@@ -25,7 +26,8 @@ class Attribute extends Model
     public $casts = [
         'booleanValue' => 'boolean',
         'repeaterValue' => 'array',
-        'metaValue' => 'array'
+        'metaValue' => 'array',
+        'keyValue' => 'array'
     ];
 
     public function page()
