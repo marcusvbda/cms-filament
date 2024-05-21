@@ -40,7 +40,8 @@
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="/">
-                    <img loading="lazy" src="{{ asset('/images/logo.png') }}" width="163" alt="logo" />
+                    <img loading="lazy" src="{{ data_get($siteAttributes, 'site_component_default.logo.url') }}"
+                        width="163" alt="logo" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
