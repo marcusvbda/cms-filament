@@ -1,4 +1,4 @@
-sudo ssh -i "gravity-labs.pem" ubuntu@ec2-3-145-89-126.us-east-2.compute.amazonaws.com
+sudo ssh -i "gravity-labs.pem" ubuntu@ec2-3-145-79-87.us-east-2.compute.amazonaws.com
 
 //install git
 sudo apt update
@@ -39,7 +39,7 @@ composer require laravel/sail --dev --ignore-platform-reqs
 sudo apt install docker-compose
 ./vendor/bin/sail up -d
 docker ps -a
-docker exec -it {container} bash
+docker exec -it  Filament-CMS_APPLICATION bash
 git config --global --add safe.directory '*'
 composer install
 yarn install
