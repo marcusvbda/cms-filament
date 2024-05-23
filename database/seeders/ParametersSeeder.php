@@ -12,34 +12,6 @@ class ParametersSeeder extends Seeder
     {
         Parameter::truncate();
         Component::where('name', 'Default component')->delete();
-
-        Parameter::create([
-            'key' => 'app_name',
-            'label' => 'application name',
-            'value' => 'ORANGE.',
-            'type' => 'text',
-        ]);
-
-        Parameter::create([
-            'key' => 'menu_type',
-            'label' => 'menu type',
-            'value' => 'sidebar',
-            'type' => 'select',
-            'attributes' => [
-                'options' => [
-                    'topbar' => 'topbar',
-                    'sidebar' => 'sidebar'
-                ],
-            ],
-        ]);
-
-        Parameter::create([
-            'key' => 'primary_color',
-            'label' => 'primary color',
-            'value' => '#EA580C',
-            'type' => 'color'
-        ]);
-
         Parameter::create([
             'key' => 'site_title',
             'label' => 'site name',

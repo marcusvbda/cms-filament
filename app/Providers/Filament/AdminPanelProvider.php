@@ -25,36 +25,19 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        if (!DB::connection()->getDatabaseName()) {
-            return $panel
-                ->id('admin')
-                ->default();
-        }
-
-        try {
-            $tableParamsExists = DB::select("SELECT * FROM information_schema.tables WHERE table_name = 'parameters'");
-        } catch (\Exception $e) {
-            $tableParamsExists = false;
-        }
-        $menuType = $tableParamsExists ? @Parameter::find('menu_type')?->value : "topbar";
-
         return $panel
             ->id('admin')
             ->default()
             ->databaseNotifications()
             ->databaseNotificationsPolling('30s')
-            ->path($tableParamsExists ? (@Parameter::find('admin_route')?->value ?? "admin") : "admin")
+            ->path("admin")
             ->spa()
-            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
-            ->topNavigation($menuType === "topbar")
-            ->brandName($tableParamsExists ?  (Parameter::find('app_name')->value ?? "Filament") : "Filament")
+            // ->topNavigation("topbar")
+            ->brandName("Filament")
             // ->brandLogo(asset('img/logo.png'))
-            ->sidebarFullyCollapsibleOnDesktop($menuType === "sidebar")
+            ->sidebarFullyCollapsibleOnDesktop(true)
             // ->spa()
             ->databaseTransactions()
-            ->colors([
-                'primary' => Color::hex($tableParamsExists ? (Parameter::find('primary_color')->value ?? "#EA580C") : "#EA580C"),
-            ])
             ->login()
             // ->registration()
             // ->emailVerification()
