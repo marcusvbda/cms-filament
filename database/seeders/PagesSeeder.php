@@ -12,7 +12,7 @@ class PagesSeeder extends Seeder
 
     public function run($action = null): void
     {
-        if ($page) {
+        if ($action) {
             $this->{$action}();
         } else {
             $this->createComponents();

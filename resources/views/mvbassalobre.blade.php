@@ -7,7 +7,7 @@
 @section('description', ucfirst(BladeTranslator::__(data_get($page, 'description'))))
 
 @section('content')
-    <div id="home-page">
-        portifolio will be here
+    <div id="portifolio-page">
+        <h1>content will be here</h1>
     </div>
 @endsection
