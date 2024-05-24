@@ -16,11 +16,16 @@ class CloudFrontProxies
     public function handle(Request $request, Closure $next): Response
     {
         $headers = $request->headers;
-        $cloudfrontProto = $headers->get('cloudfront-forwarded-proto');
-        if ($cloudfrontProto) {
-            dd("teemmm");
-            $headers->add(['x-forwarded-proto' => $cloudfrontProto]);
+        $referer = $headers->get('referer');
+        $appUrl = config("app.url");
+        if ($referer) {
+            $referer = parse_url($referer);
+            $newPrefer = $appUrl . $referer['path'];
+            $headers->add(['referer' => $newPrefer]);
+        } else {
+            $headers->add(['referer' => $appUrl]);
         }
+
         return $next($request);
     }
 }
