@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa2964cf66119fb8ddcdaa6b6eaa2739",
+    "content-hash": "212fb48c1f88768d54b654893fde5fac",
     "packages": [
         {
             "name": "andreiio/blade-remix-icon",
@@ -2965,66 +2965,6 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
-        },
-        {
-            "name": "jdavidbakr/cloudfront-proxies",
-            "version": "1.6.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jdavidbakr/CloudfrontProxies.git",
-                "reference": "5c7c0708a290d9814e1456397912758fc81af6fc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jdavidbakr/CloudfrontProxies/zipball/5c7c0708a290d9814e1456397912758fc81af6fc",
-                "reference": "5c7c0708a290d9814e1456397912758fc81af6fc",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.3|^7.0",
-                "illuminate/support": "5.6.*|5.7.*|5.8.*|6.*|7.*|8.*|^9.0|^10.0|^11.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~1.0",
-                "orchestra/testbench": "~3.0|~4.0|~5.0|~6.0|^7.0|^8.0|^9.0",
-                "phpunit/phpunit": "~7.0|~8.0|^9.0|^10.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "jdavidbakr\\CloudfrontProxies\\CloudfrontProxiesServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "jdavidbakr\\CloudfrontProxies\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "J David Baker",
-                    "email": "me@jdavidbaker.com",
-                    "homepage": "http://www.jdavidbaker.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Sets proxy settings for Cloudfront in a Laravel project",
-            "keywords": [
-                "cloudfront",
-                "laravel",
-                "trusted proxies"
-            ],
-            "support": {
-                "issues": "https://github.com/jdavidbakr/CloudfrontProxies/issues",
-                "source": "https://github.com/jdavidbakr/CloudfrontProxies/tree/1.6.7"
-            },
-            "time": "2024-02-27T21:08:05+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
