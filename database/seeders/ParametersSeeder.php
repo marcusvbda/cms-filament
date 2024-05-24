@@ -31,6 +31,12 @@ class ParametersSeeder extends Seeder
         ]);
 
         $component->_attributes()->create([
+            'key' => 'favicon',
+            'type' => 'file',
+            'fileValue' => 'favicon.ico'
+        ]);
+
+        $component->_attributes()->create([
             'key' => 'logo',
             'type' => 'file',
             'fileValue' => 'logo.png'

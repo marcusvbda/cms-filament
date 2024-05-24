@@ -19,6 +19,7 @@
 
     $siteTitle = data_get($siteAttributes, 'site_component_default.site_title');
     $siteDescription = data_get($siteAttributes, 'site_component_default.site_description');
+    $favicon = data_get($siteAttributes, 'site_component_default.favicon.url');
 @endphp
 
 <!doctype html>
@@ -33,6 +34,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     <title>Gravity labs | @yield('title')</title>
+    <link rel="shortcut icon" href="{{ $favicon }}" type="image/x-icon">
 </head>
 
 <body>
