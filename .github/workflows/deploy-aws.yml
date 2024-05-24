@@ -28,6 +28,8 @@ jobs:
             git reset --hard HEAD
             git pull origin master
             sudo docker exec Filament-CMS_APPLICATION php artisan down
+            sudo docker exec Filament-CMS_APPLICATION composer install
+            sudo docker exec Filament-CMS_APPLICATION npm install
             sudo docker exec Filament-CMS_APPLICATION npm run build
             sudo docker exec Filament-CMS_APPLICATION php artisan migrate
             sudo docker exec Filament-CMS_APPLICATION php artisan config:cache
