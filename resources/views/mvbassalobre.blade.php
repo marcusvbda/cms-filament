@@ -8,6 +8,6 @@
 
 @section('content')
     <div id="portifolio-page">
-        <h1>content will be here</h1>
+        <h1>content will be here ... </h1>
     </div>
 @endsection

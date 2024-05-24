@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Component;
 use App\Models\Page;
 use App\Models\Parameter;
-use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
@@ -27,9 +26,8 @@ class PagesController extends Controller
         return view($page->slug, compact('page', 'pageAttributes', 'siteAttributes'))->render();
     }
 
-    public function setLanguage(Request $request, $lang)
+    public function setLanguage($lang)
     {
-        $headers = $request->headers;
         session()->put('locale', $lang);
         return redirect()->back();
     }
