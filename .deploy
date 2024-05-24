@@ -1,5 +1,5 @@
 # Conectar ao servidor
-sudo ssh -i "gravity-labs.pem" ubuntu@ec2-18-216-55-80.us-east-2.compute.amazonaws.com
+sudo ssh -i "gravitylabs.pem" ubuntu@ec2-44-222-201-33.compute-1.amazonaws.com
 
 # Instalar Git
 sudo apt update
