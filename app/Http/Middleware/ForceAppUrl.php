@@ -11,7 +11,6 @@ class ForceAppUrl
 {
     public function handle(Request $request, Closure $next): Response
     {
-        // 
         $url = config('app.url');
         URL::forceRootUrl($url);
         return $next($request);
