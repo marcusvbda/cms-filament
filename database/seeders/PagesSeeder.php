@@ -10,10 +10,25 @@ class PagesSeeder extends Seeder
 {
     protected $componentHero, $exampleBanner, $descriptionBanner, $iconSetion, $casesSection, $testimonialsSection, $contactSection;
 
-    public function run(): void
+    public function run($action = null): void
     {
-        $this->createComponents();
-        $this->createHome();
+        if ($page) {
+            $this->{$action}();
+        } else {
+            $this->createComponents();
+            $this->createHome();
+        }
+    }
+
+    public function createPortifolioPage()
+    {
+        $page = Page::create([
+            'title' => 'Marcus Vinicius Bassalobre de Assis',
+            'description' => 'lorem ipsum',
+            'slug' => 'mvbassalobre',
+            'type' => 'blade',
+            'is_published' => true
+        ]);
     }
 
     public function createComponents(): void

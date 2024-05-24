@@ -7,5 +7,9 @@ window.window.Swiper.use([Autoplay]);
 import AOS from 'aos';
 AOS.init({
     duration: 500,
-    once: true
+    once: true,
+    disable: () => {
+        var maxWidth = 600;
+        return window.innerWidth < maxWidth;
+    }
 });
