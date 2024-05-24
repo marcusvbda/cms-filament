@@ -16,8 +16,11 @@ class CloudFrontProxies
     public function handle(Request $request, Closure $next): Response
     {
         $headers = $request->headers;
-        dd("aqui", $headers, $headers->get('cloudfront-forwarded-proto'));
-        $headers->add(['x-forwarded-proto' => $headers->get('cloudfront-forwarded-proto')]);
+        $cloudfrontProto = $headers->get('cloudfront-forwarded-proto');
+        if ($cloudfrontProto) {
+            dd("teemmm");
+            $headers->add(['x-forwarded-proto' => $cloudfrontProto]);
+        }
         return $next($request);
     }
 }

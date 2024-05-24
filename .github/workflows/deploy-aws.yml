@@ -6,9 +6,12 @@ on:
       - master
     types:
       - closed
+  push:
+    branches:
+      - master
 
 jobs:
-  check-application:
+  deploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
@@ -24,19 +27,30 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@ec2-44-222-201-33.compute-1.amazonaws.com << EOF
+            set -e  # Para parar a execução se qualquer comando falhar
             cd cms-filament
+
+            echo "Atualizando código..."
             git reset --hard HEAD
             git pull origin master
+
+            echo "Colocando aplicação em modo de manutenção..."
             sudo docker exec Filament-CMS_APPLICATION php artisan down
-            sudo docker exec Filament-CMS_APPLICATION composer install
+
+            echo "Instalando dependências..."
+            sudo docker exec Filament-CMS_APPLICATION composer install --no-interaction --prefer-dist --optimize-autoloader
             sudo docker exec Filament-CMS_APPLICATION npm install
             sudo docker exec Filament-CMS_APPLICATION npm run build
-            sudo docker exec Filament-CMS_APPLICATION php artisan migrate
+
+            echo "Executando migrações e otimizando..."
+            sudo docker exec Filament-CMS_APPLICATION php artisan migrate --force
             sudo docker exec Filament-CMS_APPLICATION php artisan config:cache
             sudo docker exec Filament-CMS_APPLICATION php artisan route:cache
-            sudo docker exec Filament-CMS_APPLICATION composer dump-autoload -o
+            sudo docker exec Filament-CMS_APPLICATION php artisan optimize:clear
             sudo docker exec Filament-CMS_APPLICATION php artisan optimize
-            sudo docker exec Filament-CMS_APPLICATION php artisan icons:cache
+
+            echo "Reiniciando serviços..."
             sudo docker exec Filament-CMS_APPLICATION php artisan up
-            # 
+
+            echo "Deploy finalizado com sucesso!"
           EOF
