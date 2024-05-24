@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-216-55-80.us-east-2.compute.amazonaws.com << EOF
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-44-222-201-33.compute-1.amazonaws.com << EOF
             cd cms-filament
             git reset --hard HEAD
             git pull origin master
