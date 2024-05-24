@@ -17,7 +17,7 @@ class Kernel extends HttpKernel
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\ForceAppUrl::class,
         \App\Http\Middleware\TrustProxies::class,
-        \jdavidbakr\CloudfrontProxies\CloudfrontProxies::class,
+        \App\Http\Middleware\CloudFrontProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\LanguageMiddleware::class,
+            \App\Http\Middleware\LanguageMiddleware::class
         ],
 
         'api' => [
