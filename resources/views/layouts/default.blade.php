@@ -92,7 +92,7 @@
                 <ul class="list-unstyled d-flex">
                     @if ($twitterUrl)
                         <li class="ms-3">
-                            <a class="link-dark twitter-x" href="{{ $twitterUrl }}">
+                            <a class="link-dark twitter-x" href="{{ $twitterUrl }}" aria-label="twitter-x">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
                                     <path
@@ -103,7 +103,7 @@
                     @endif
                     @if ($linkedinUrl)
                         <li class="ms-3">
-                            <a class="link-dark linkedin" href="{{ $linkedinUrl }}">
+                            <a class="link-dark linkedin" href="{{ $linkedinUrl }}" aria-label="linkedin">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
                                     <path
@@ -114,7 +114,7 @@
                     @endif
                     @if ($instagramUrl)
                         <li class="ms-3">
-                            <a class="link-dark instagram" href="{{ $instagramUrl }}">
+                            <a class="link-dark instagram" href="{{ $instagramUrl }}" aria-label="instagram">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
                                     <path

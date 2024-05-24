@@ -20,13 +20,13 @@
                         <div class="form-holder">
                             <form name="contactform" method="POST" class="row contact-form" novalidate="novalidate">
                                 <div class="col-md-12 input-subject mb-4">
-                                    <label class="p-lg">
+                                    <label class="p-lg" id="q1">
                                         {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q1_text'))) }}:*
                                     </label>
                                     <div class="text-muted mb-2">
                                         {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q1_desc'))) }}
                                     </div>
-                                    <select class="form-control subject">
+                                    <select class="form-control subject" aria-labelledby="q1">
                                         <option selected="">
                                             {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q1_text'))) }}
                                         </option>
@@ -38,13 +38,13 @@
                                 </div>
 
                                 <div class="col-md-12 mb-4">
-                                    <label class="p-lg">
+                                    <label class="p-lg" id="q2">
                                         {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q2_text'))) }}:*
                                     </label>
                                     <div class="text-muted mb-2">
                                         {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q2_desc'))) }}
                                     </div>
-                                    <input type="text" name="name" class="form-control name"
+                                    <input type="text" name="name" class="form-control name" aria-labelledby="q2"
                                         placeholder="{{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q2_text'))) }}*">
                                     <div data-lastpass-icon-root=""
                                         style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;">
@@ -52,13 +52,13 @@
                                 </div>
 
                                 <div class="col-md-12 mb-4">
-                                    <label class="p-lg">
+                                    <label class="p-lg" id="q3">
                                         {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q3_text'))) }}:*
                                     </label>
                                     <div class="text-muted mb-2">
                                         {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q3_desc'))) }}
                                     </div>
-                                    <textarea class="form-control message" name="message" rows="6"
+                                    <textarea class="form-control message" name="message" rows="6" aria-labelledby="q3"
                                         placeholder=" {{ ucfirst(BladeTranslator::__(data_get($pageAttributes, 'section_contact.q3_text'))) }}"></textarea>
                                 </div>
 

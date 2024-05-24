@@ -18,6 +18,7 @@
                                 <div class="case-card">
                                     <h4> {{ ucfirst(BladeTranslator::__(data_get($case, 'meta.title'))) }}</h4>
                                     <a class="case-card-content" href="{{ data_get($case, 'meta.url') }}"
+                                        aria-label="{{ ucfirst(BladeTranslator::__(data_get($case, 'meta.title'))) }}"
                                         target="_blank" style="--case-image:url('{{ data_get($case, 'url') }}')">
                                         <div class="overlay-eye">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
