@@ -22,16 +22,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (config('app.env') === 'production') {
-            $url = config("app.url");
             URL::forceScheme('https');
         }
 
-        $url = config("app.url");
-        URL::forceRootUrl($url);
-
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch
-                ->locales(['pt_BR', 'en']);
+            $switch->locales(['pt_BR', 'en']);
         });
     }
 }
